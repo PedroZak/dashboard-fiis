@@ -136,6 +136,45 @@
   .acoes{ display:flex; gap:10px; justify-content:flex-end; }
   .acoes .btn{ padding:10px 16px; font-size:14px; }
 
+  /* ---------- Aba Evolução ---------- */
+  .evo{
+    /* categóricas validadas (dataviz) contra a superfície #121B2E: CVD ΔE 8,4 · normal ΔE 19,3 · contraste ≥ 3:1 */
+    --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --s5:#d55181; --s6:#008300; --s7:#9085e9; --s-outros:#5b6577;
+    --grid:#1d2940; --axis:#2f3d57;
+  }
+  .chart-card{ background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:14px 14px 10px; position:relative; }
+  .chart-head{ display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
+  .chips{ display:flex; gap:6px; }
+  .chip{ background:var(--bg); border:1px solid var(--line); color:var(--text-dim); border-radius:999px; font-size:11.5px; padding:5px 11px; cursor:pointer; font-family:'Inter',sans-serif; }
+  .chip.on{ color:var(--gold); border-color:var(--gold); }
+  .leg{ display:flex; flex-wrap:wrap; gap:6px 14px; font-size:11.5px; color:var(--text-dim); }
+  .leg span{ display:inline-flex; align-items:center; gap:6px; }
+  .leg i{ width:10px; height:10px; border-radius:2px; display:inline-block; }
+  .leg i.linha{ height:2px; border-radius:1px; width:14px; }
+  .chart-box{ width:100%; }
+  .chart-box svg{ display:block; width:100%; overflow:visible; }
+  .chart-box text{ font-family:'IBM Plex Mono',monospace; font-size:10px; fill:var(--text-dim); }
+  .chart-box text.tot{ fill:var(--text); font-size:10.5px; }
+  #tip{ position:fixed; z-index:200; pointer-events:none; background:var(--surface-2); border:1px solid var(--line); border-radius:8px; padding:8px 10px; font-size:12px; line-height:1.5; box-shadow:0 6px 18px rgba(0,0,0,.35); display:none; max-width:240px; }
+  #tip b{ font-family:'Space Grotesk',sans-serif; }
+  #tip .mono{ font-size:11.5px; }
+  .marcos{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:28px; }
+  .marco-lista{ display:flex; flex-direction:column; gap:3px; font-size:12px; color:var(--text-dim); }
+  .marco-lista b{ color:var(--text); font-family:'IBM Plex Mono',monospace; font-weight:500; }
+  .kpi .delta{ font-size:11.5px; margin-top:6px; font-family:'IBM Plex Mono',monospace; }
+  .meta-card{ background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:16px; }
+  .meta-linha{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:14px; font-size:13px; }
+  .meta-linha input{ background:var(--bg); border:1px solid var(--line); border-radius:8px; color:var(--text); font-size:16px; padding:8px 10px; width:120px; font-family:'IBM Plex Mono',monospace; }
+  .meta-linha input:focus{ outline:none; border-color:var(--gold); }
+  .barra-meta{ height:10px; background:var(--surface-2); border-radius:5px; overflow:hidden; margin:6px 0 14px; }
+  .barra-meta div{ height:100%; background:var(--gold); border-radius:5px; }
+  .meta-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+  .meta-grid .label{ font-size:11.5px; color:var(--text-dim); margin-bottom:4px; }
+  .meta-grid .value{ font-family:'IBM Plex Mono',monospace; font-size:16px; font-weight:600; }
+  tr.vendido td{ color:var(--text-dim); }
+  @media (max-width:900px){ .marcos{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:640px){ .meta-grid{ grid-template-columns:1fr; } .marcos{ gap:10px; } }
+
   footer{ border-top:1px solid var(--line); padding-top:16px; margin-top:8px; font-size:11.5px; color:var(--text-dim); line-height:1.7; }
   footer code{ background:var(--surface); padding:2px 6px; border-radius:4px; font-size:11px; }
 
@@ -197,6 +236,7 @@
   <button class="tab-btn active" data-tab="geral">Visão Geral</button>
   <button class="tab-btn" data-tab="posicoes">Posições</button>
   <button class="tab-btn" data-tab="proventos">Proventos</button>
+  <button class="tab-btn" data-tab="evolucao">Evolução</button>
 </div>
 
 <div class="tab-content" id="tab-geral">
@@ -315,6 +355,59 @@
 </section>
 
 </div>
+
+<div class="tab-content evo" id="tab-evolucao" style="display:none">
+
+<div class="marcos" id="evo-cards"></div>
+
+<section>
+  <div class="section-title">Proventos mês a mês</div>
+  <div class="section-note">Barras = o que caiu em cada mês · linha = média dos últimos 12 meses fechados (tira o ruído de pagamentos extraordinários)</div>
+  <div class="chart-card">
+    <div class="chart-head">
+      <div class="leg"><span><i style="background:var(--gold)"></i>Proventos do mês</span><span><i class="linha" style="background:var(--teal)"></i>Média 12 meses</span></div>
+      <div class="chips" id="evo-faixa">
+        <button class="chip" data-meses="0">Tudo</button>
+        <button class="chip on" data-meses="36">3 anos</button>
+        <button class="chip" data-meses="12">12 meses</button>
+      </div>
+    </div>
+    <div class="chart-box" id="evo-mensal"></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">Proventos por ano, por fundo</div>
+  <div class="section-note">Quem sustentou a renda em cada ano — inclui fundos já vendidos. * = ano em andamento</div>
+  <div class="chart-card">
+    <div class="chart-head"><div class="leg" id="evo-leg-anual"></div></div>
+    <div class="chart-box" id="evo-anual"></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">Pagamento de cada fundo</div>
+  <div class="section-note">Último pagamento comparado com a média dos 12 meses anteriores — queda forte costuma indicar corte de rendimento</div>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>Ativo</th><th>Último pgto</th><th>Média 12m ant.</th><th>Último vs média</th><th>12m vs 12m ant.</th><th>Total recebido</th><th>Recebe desde</th></tr></thead>
+    <tbody id="evo-fundos"></tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">Meta de renda mensal</div>
+  <div class="section-note">Quanto falta investir para chegar na renda que você quer, mantendo o rendimento atual da carteira</div>
+  <div class="meta-card" id="evo-meta">
+    <div class="meta-linha">Quero receber <input id="meta-renda" type="number" inputmode="decimal" min="0" step="10" placeholder="200"> por mês</div>
+    <div id="meta-corpo"></div>
+  </div>
+</section>
+
+</div>
+
+<div id="tip"></div>
 
 <footer>
   Sua carteira (cotas, preço médio e histórico de proventos) fica <b>só neste aparelho</b> — nada é enviado para lugar nenhum.
@@ -699,6 +792,7 @@ function render(data){
     </tr>`).join('');
 
   document.getElementById('sub-updated').textContent = `${data.positions.length} ativos · carteira guardada neste aparelho`;
+  renderEvolucao();
 }
 
 function mostrarStatus(merc, offline){
@@ -716,6 +810,251 @@ function mostrarAviso(partes){
   el.innerHTML = partes.join('<br>');
   el.classList.toggle('on', partes.length > 0);
 }
+
+/* ====================== Evolução dos proventos ====================== */
+const ymLabel = ym => MESES[+ym.slice(5,7)-1] + '/' + ym.slice(2,4);
+const addMes = (ym, n) => { const t = (+ym.slice(0,4)) * 12 + (+ym.slice(5,7) - 1) + n; return `${Math.floor(t/12)}-${String(t%12 + 1).padStart(2,'0')}`; };
+let evoFaixa = 36;
+
+function dadosEvolucao(cart){
+  const prov = cart.proventos, atual = hojeISO().slice(0,7);
+  const lanc = Array.isArray(prov.lancamentos) && prov.lancamentos.length ? prov.lancamentos : null;
+  const porMes = {};
+  if (lanc) for (const l of lanc) porMes[l.m] = (porMes[l.m] || 0) + l.v;
+  else for (const x of prov.mensal) { const [mm, aa] = x.m.split('/'); porMes[`20${aa}-${String(MESES.indexOf(mm)+1).padStart(2,'0')}`] = x.v; }
+  const chaves = Object.keys(porMes).sort();
+  if (!chaves.length) return null;
+  const meses = [];
+  for (let k = chaves[0]; k <= atual; k = addMes(k, 1)) meses.push({m:k, v:r2(porMes[k] || 0), parcial: k === atual});
+  meses.forEach((x, i) => {          // média móvel só com meses fechados
+    if (x.parcial || i < 11) { x.media = null; return; }
+    let s = 0; for (let j = i - 11; j <= i; j++) s += meses[j].v;
+    x.media = r2(s / 12);
+  });
+  return {meses, lanc, atual};
+}
+
+const niceMax = v => { const p = Math.pow(10, Math.floor(Math.log10(v || 1))); for (const k of [1,1.5,2,2.5,3,4,5,6,8,10]) if (k*p >= v) return k*p; return 10*p; };
+const barraTopo = (x, y, w, h, r) => { r = Math.max(0, Math.min(r, w/2, h)); return `M${x},${y+h}V${y+r}Q${x},${y} ${x+r},${y}H${x+w-r}Q${x+w},${y} ${x+w},${y+r}V${y+h}Z`; };
+
+/* Tooltip compartilhado: mouse mostra ao passar; toque mostra ao tocar e some ao tocar fora. */
+const tip = document.getElementById('tip');
+function mostrarTip(html, ev){
+  tip.innerHTML = html; tip.style.display = 'block';
+  const r = tip.getBoundingClientRect();
+  let x = ev.clientX + 14, y = ev.clientY - r.height - 12;
+  if (x + r.width > innerWidth - 8) x = ev.clientX - r.width - 14;
+  if (x < 8) x = 8;
+  if (y < 8) y = ev.clientY + 16;
+  tip.style.left = x + 'px'; tip.style.top = y + 'px';
+}
+function esconderTip(){ tip.style.display = 'none'; document.querySelectorAll('.evo-cross').forEach(l => l.setAttribute('visibility','hidden')); }
+document.addEventListener('pointerdown', e => { if (!e.target.closest('.chart-box')) esconderTip(); });
+addEventListener('scroll', esconderTip, {passive:true});
+
+function desenharMensal(ev){
+  const box = document.getElementById('evo-mensal'), W = box.clientWidth;
+  if (!W) return;
+  const serie = evoFaixa ? ev.meses.slice(-(evoFaixa + 1)) : ev.meses;
+  const H = 230, pl = hideValues ? 10 : 50, pr = 6, pt = 12, pb = 24, iw = W - pl - pr, ih = H - pt - pb;
+  const maxV = niceMax(Math.max(...serie.map(x => Math.max(x.v, x.media || 0))));
+  const step = iw / serie.length, gap = step >= 6 ? 2 : 1, bw = Math.max(1, step - gap);
+  const y = v => pt + ih - v / maxV * ih;
+  let g = '';
+  for (let i = 0; i <= 4; i++) {
+    const v = maxV * i / 4, yy = y(v);
+    g += `<line x1="${pl}" x2="${W-pr}" y1="${yy}" y2="${yy}" stroke="var(${i ? '--grid' : '--axis'})"/>`;
+    if (!hideValues) g += `<text x="${pl-6}" y="${yy+3}" text-anchor="end">R$ ${fmt(v,0)}</text>`;
+  }
+  serie.forEach((x, i) => {
+    if (!x.v) return;
+    g += `<path d="${barraTopo(pl + i*step + gap/2, y(x.v), bw, ih * x.v / maxV, bw >= 8 ? 4 : bw/2)}" fill="var(--gold)" opacity="${x.parcial ? .38 : .9}"/>`;
+  });
+  let d = '', pen = false;
+  serie.forEach((x, i) => { if (x.media == null) { pen = false; return; } d += (pen ? 'L' : 'M') + (pl + i*step + step/2).toFixed(1) + ',' + y(x.media).toFixed(1); pen = true; });
+  if (d) g += `<path d="${d}" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
+  const porAno = serie.length > 15, cada = Math.max(1, Math.ceil(40 / step));
+  serie.forEach((x, i) => {
+    const jan = x.m.endsWith('-01');
+    if (porAno ? jan : i % cada === 0)
+      g += `<text x="${pl + i*step + step/2}" y="${H-6}" text-anchor="middle">${porAno ? x.m.slice(0,4) : ymLabel(x.m)}</text>`;
+  });
+  g += `<line class="evo-cross" x1="0" x2="0" y1="${pt}" y2="${pt+ih}" stroke="var(--text-dim)" stroke-dasharray="3 3" visibility="hidden"/>`;
+  g += `<rect x="${pl}" y="0" width="${iw}" height="${H}" fill="transparent" class="hit"/>`;
+  box.innerHTML = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Proventos por mês com média de 12 meses">${g}</svg>`;
+
+  const svg = box.querySelector('svg'), cross = svg.querySelector('.evo-cross');
+  const mover = e => {
+    const px = e.clientX - svg.getBoundingClientRect().left;
+    const i = Math.max(0, Math.min(serie.length - 1, Math.floor((px - pl) / step)));
+    const x = serie[i], cx = pl + i*step + step/2;
+    cross.setAttribute('x1', cx); cross.setAttribute('x2', cx); cross.setAttribute('visibility', 'visible');
+    mostrarTip(`<b>${ymLabel(x.m)}</b>${x.parcial ? ' <span class="dim">(mês em andamento)</span>' : ''}<br>
+      <span class="mono">Proventos&nbsp; ${fmtR(x.v)}</span><br>
+      <span class="mono">Média 12m&nbsp; ${x.media != null ? fmtR(x.media) : '—'}</span>`, e);
+  };
+  svg.addEventListener('pointermove', mover);
+  svg.addEventListener('pointerdown', mover);
+  svg.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') esconderTip(); });
+}
+
+function gruposAnuais(lanc){
+  const tot = {};
+  lanc.forEach(l => tot[l.t] = (tot[l.t] || 0) + l.v);
+  const rank = Object.keys(tot).sort((a,b) => tot[b] - tot[a]);
+  const top = rank.slice(0, 7), outros = rank.slice(7);
+  const cor = {}; top.forEach((t, i) => cor[t] = `var(--s${i+1})`); cor.Outros = 'var(--s-outros)';
+  return {top, outros, cor, grupos: outros.length ? [...top, 'Outros'] : top, grupoDe: t => top.includes(t) ? t : 'Outros'};
+}
+
+function desenharAnual(ev){
+  const box = document.getElementById('evo-anual'), leg = document.getElementById('evo-leg-anual'), W = box.clientWidth;
+  if (!W) return;
+  if (!ev.lanc) { leg.innerHTML = ''; box.innerHTML = '<p class="dim" style="font-size:12.5px;padding:8px 0">Esta carteira não tem o detalhe por fundo. Importe o arquivo gerado a partir da planilha para ver este gráfico.</p>'; return; }
+  const G = gruposAnuais(ev.lanc);
+  leg.innerHTML = G.grupos.map(gk => `<span><i style="background:${G.cor[gk]}"></i>${gk === 'Outros' ? 'Outros (' + G.outros.join(', ') + ')' : esc(gk)}</span>`).join('');
+
+  const anos = {}, detalhe = {};
+  ev.lanc.forEach(l => {
+    const a = l.m.slice(0,4), gk = G.grupoDe(l.t);
+    anos[a] = anos[a] || {}; anos[a][gk] = (anos[a][gk] || 0) + l.v;
+    detalhe[a] = detalhe[a] || {}; detalhe[a][l.t] = (detalhe[a][l.t] || 0) + l.v;
+  });
+  const lista = Object.keys(anos).sort(), anoAtual = ev.atual.slice(0,4);
+  const totais = lista.map(a => Object.values(anos[a]).reduce((s,v)=>s+v,0));
+  const H = 250, pl = hideValues ? 10 : 50, pr = 6, pt = 20, pb = 22, iw = W - pl - pr, ih = H - pt - pb;
+  const maxV = niceMax(Math.max(...totais));
+  const step = iw / lista.length, bw = Math.min(56, step * 0.64);
+  const y = v => pt + ih - v / maxV * ih;
+  let g = '';
+  for (let i = 0; i <= 4; i++) {
+    const v = maxV * i / 4, yy = y(v);
+    g += `<line x1="${pl}" x2="${W-pr}" y1="${yy}" y2="${yy}" stroke="var(${i ? '--grid' : '--axis'})"/>`;
+    if (!hideValues) g += `<text x="${pl-6}" y="${yy+3}" text-anchor="end">R$ ${fmt(v,0)}</text>`;
+  }
+  lista.forEach((a, i) => {
+    const x0 = pl + i*step + (step - bw)/2;
+    let base = pt + ih;
+    const presentes = G.grupos.filter(gk => anos[a][gk] > 0);
+    presentes.forEach((gk, j) => {
+      const v = anos[a][gk], h = v / maxV * ih, topo = j === presentes.length - 1;
+      const hDesenho = topo ? h : Math.max(0, h - 2);           // 2px de respiro entre segmentos
+      const yTopo = base - h;
+      const forma = topo ? `<path d="${barraTopo(x0, yTopo, bw, hDesenho, 4)}"` : `<rect x="${x0}" y="${yTopo + 2}" width="${bw}" height="${hDesenho}"`;
+      g += `${forma} fill="${G.cor[gk]}" data-a="${a}" data-g="${esc(gk)}" class="seg"/>`;
+      base -= h;
+    });
+    if (!hideValues) g += `<text class="tot" x="${x0 + bw/2}" y="${y(totais[i]) - 6}" text-anchor="middle"${step < 46 ? ' style="font-size:9px"' : ''}>${fmt(totais[i],0)}</text>`;
+    g += `<text x="${x0 + bw/2}" y="${H-6}" text-anchor="middle">${a}${a === anoAtual ? '*' : ''}</text>`;
+  });
+  box.innerHTML = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Proventos por ano, empilhados por fundo">${g}</svg>`;
+
+  const svg = box.querySelector('svg');
+  const mover = e => {
+    const seg = e.target.closest('.seg');
+    if (!seg) { if (e.pointerType === 'mouse') esconderTip(); return; }
+    const a = seg.dataset.a, gk = seg.dataset.g, v = anos[a][gk], tot = totais[lista.indexOf(a)];
+    let html = `<b>${a}${a === anoAtual ? ' (em andamento)' : ''} · ${esc(gk)}</b><br><span class="mono">${fmtR(r2(v))} · ${fmtPctPlain(v / tot * 100, 0)} do ano</span>`;
+    if (gk === 'Outros') html += '<br>' + G.outros.filter(t => detalhe[a][t]).map(t => `<span class="mono dim">${esc(t)} ${fmtR(r2(detalhe[a][t]))}</span>`).join('<br>');
+    mostrarTip(html, e);
+  };
+  svg.addEventListener('pointermove', mover);
+  svg.addEventListener('pointerdown', mover);
+  svg.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') esconderTip(); });
+}
+
+function cardsEvolucao(ev){
+  const el = document.getElementById('evo-cards');
+  const fech = ev.meses.filter(x => !x.parcial);
+  const total = r2(ev.meses.reduce((s,x)=>s+x.v,0));
+  const u12 = fech.slice(-12).reduce((s,x)=>s+x.v,0), a12 = fech.slice(-24,-12).reduce((s,x)=>s+x.v,0);
+  const var12 = a12 ? (u12 / a12 - 1) * 100 : null;
+  const maior = ev.meses.reduce((m,x) => x.v > m.v ? x : m, ev.meses[0]);
+  const marco = lim => { const x = ev.meses.find(x => x.v >= lim); return x ? ymLabel(x.m) : 'ainda não'; };
+  el.innerHTML = `
+    <div class="kpi"><div class="label">Total recebido desde ${ymLabel(ev.meses[0].m)}</div><div class="value gold">${fmtR(total)}</div></div>
+    <div class="kpi"><div class="label">Últimos 12 meses fechados</div><div class="value">${fmtR(r2(u12))}</div>
+      <div class="delta ${var12 == null ? 'dim' : var12 >= 0 ? 'pos' : 'neg'}">${var12 == null ? '' : (var12 >= 0 ? '▲ ' : '▼ ') + fmtPct(var12,1) + ' vs 12m anteriores'}</div></div>
+    <div class="kpi"><div class="label">Maior mês</div><div class="value">${fmtR(maior.v)}</div><div class="delta dim">${ymLabel(maior.m)}</div></div>
+    <div class="kpi"><div class="label">Marcos de renda mensal</div><div class="marco-lista">
+      <span>≥ R$ 10 · <b>${marco(10)}</b></span><span>≥ R$ 50 · <b>${marco(50)}</b></span><span>≥ R$ 100 · <b>${marco(100)}</b></span></div></div>`;
+}
+
+function tabelaFundos(ev){
+  const body = document.getElementById('evo-fundos');
+  if (!ev.lanc) { body.innerHTML = '<tr><td colspan="7" class="dim">Disponível com o arquivo gerado a partir da planilha.</td></tr>'; return; }
+  const porT = {};
+  ev.lanc.forEach(l => { porT[l.t] = porT[l.t] || {}; porT[l.t][l.m] = (porT[l.t][l.m] || 0) + l.v; });
+  const fimFech = addMes(ev.atual, -1);
+  const soma = (m, de, ate) => Object.entries(m).filter(([k]) => k >= de && k <= ate).reduce((s,[,v])=>s+v,0);
+  const linhas = Object.entries(porT).map(([t, m]) => {
+    const ks = Object.keys(m).sort(), primeiro = ks[0], ult = ks[ks.length-1];
+    const iniJan = addMes(ult, -12) < primeiro ? primeiro : addMes(ult, -12);
+    let nMeses = 0; for (let k = iniJan; k < ult; k = addMes(k,1)) nMeses++;
+    const media = nMeses ? soma(m, iniJan, addMes(ult,-1)) / nMeses : null;
+    const s12 = soma(m, addMes(fimFech,-11), fimFech), s12a = soma(m, addMes(fimFech,-23), addMes(fimFech,-12));
+    const h = CART.ativos[t], ativo = !!(h && h.cotas > 0);
+    return {t, ult, vUlt: m[ult], media, dUlt: media ? (m[ult] / media - 1) * 100 : null,
+            d12: (s12a && s12) ? (s12 / s12a - 1) * 100 : null, total: Object.values(m).reduce((s,v)=>s+v,0), primeiro, ativo};
+  }).sort((a,b) => (b.ativo - a.ativo) || (b.total - a.total));
+  const seta = d => d == null ? '<span class="dim">—</span>'
+    : Math.abs(d) < 3 ? `<span class="dim">≈ estável</span>`
+    : `<span class="${d > 0 ? 'pos' : 'neg'}">${d > 0 ? '▲' : '▼'} ${fmtPct(d,0)}</span>`;
+  body.innerHTML = linhas.map(l => l.ativo ? `
+    <tr><td class="ticker-cell">${esc(l.t)}</td><td>${fmtR(r2(l.vUlt))}<span class="seg-tag">${ymLabel(l.ult)}</span></td>
+      <td>${l.media != null ? fmtR(r2(l.media)) : '—'}</td><td>${seta(l.dUlt)}</td><td>${seta(l.d12)}</td>
+      <td>${fmtR(r2(l.total))}</td><td>${ymLabel(l.primeiro)}</td></tr>` : `
+    <tr class="vendido"><td class="ticker-cell">${esc(l.t)}<span class="seg-tag">vendido</span></td><td colspan="4">recebeu de ${ymLabel(l.primeiro)} a ${ymLabel(l.ult)}</td>
+      <td>${fmtR(r2(l.total))}</td><td>${ymLabel(l.primeiro)}</td></tr>`).join('');
+}
+
+function renderMeta(){
+  const corpo = document.getElementById('meta-corpo'), inp = document.getElementById('meta-renda');
+  if (document.activeElement !== inp) inp.value = CART.metaRenda ?? '';
+  const meta = +CART.metaRenda || 200;
+  if (!MERC) { corpo.innerHTML = '<p class="dim">Precisa dos dados de mercado para calcular.</p>'; return; }
+  let renda = 0, valor = 0;
+  for (const [t, h] of Object.entries(CART.ativos)) {
+    const d = MERC.ativos[t]; if (!h.cotas || !d) continue;
+    const evs = d.proventos || [];
+    const ultCom = evs.reduce((m, e) => e.dataCom > m ? e.dataCom : m, '');
+    const porCota = evs.filter(e => e.dataCom === ultCom).reduce((s,e)=>s+(e.valor||0),0);
+    renda += porCota * h.cotas; valor += (d.preco || h.pm) * h.cotas;
+  }
+  const yieldAno = valor ? renda * 12 / valor : 0;
+  const falta = Math.max(0, meta - renda), investir = yieldAno ? falta * 12 / yieldAno : null;
+  const pct = Math.min(100, renda / meta * 100);
+  corpo.innerHTML = `
+    ${CART.metaRenda ? '' : '<p class="dim" style="font-size:12px;margin-bottom:8px">Exemplo com R$ 200 — digite a sua meta acima.</p>'}
+    <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text-dim)"><span>Renda recorrente hoje</span><span>${hideValues ? '—' : fmt(pct,0) + '% da meta'}</span></div>
+    <div class="barra-meta"><div style="width:${hideValues ? 0 : pct}%"></div></div>
+    <div class="meta-grid">
+      <div><div class="label">Renda recorrente hoje</div><div class="value gold">${fmtR(r2(renda))}<span class="dim" style="font-size:12px">/mês</span></div></div>
+      <div><div class="label">Falta por mês</div><div class="value">${falta > 0 ? fmtR(r2(falta)) : (hideValues ? '—' : 'meta atingida')}</div></div>
+      <div><div class="label">Investimento estimado para chegar lá</div><div class="value">${falta > 0 && investir ? fmtR(Math.ceil(investir / 100) * 100) : '—'}</div></div>
+    </div>
+    <div class="caveat">Renda recorrente = último rendimento anunciado de cada fundo × suas cotas. O investimento usa o rendimento atual da carteira (${hideValues ? '—' : fmt(yieldAno*100,1) + '% ao ano'} sobre o valor de mercado) — se os fundos cortarem ou aumentarem os pagamentos, a conta muda.</div>`;
+}
+document.getElementById('meta-renda').addEventListener('input', e => {
+  const v = parseFloat(e.target.value);
+  CART.metaRenda = v > 0 ? v : null;
+  salvarCarteira(CART);
+  renderMeta();
+});
+
+function renderEvolucao(){
+  if (!CART || document.getElementById('tab-evolucao').style.display === 'none') return;
+  const ev = dadosEvolucao(CART);
+  if (!ev) { document.getElementById('evo-cards').innerHTML = '<p class="dim">Ainda não há proventos registrados.</p>'; return; }
+  cardsEvolucao(ev); desenharMensal(ev); desenharAnual(ev); tabelaFundos(ev); renderMeta();
+}
+document.getElementById('evo-faixa').addEventListener('click', e => {
+  const b = e.target.closest('.chip'); if (!b) return;
+  evoFaixa = +b.dataset.meses;
+  document.querySelectorAll('#evo-faixa .chip').forEach(c => c.classList.toggle('on', c === b));
+  esconderTip(); renderEvolucao();
+});
+let _rz; addEventListener('resize', () => { clearTimeout(_rz); _rz = setTimeout(renderEvolucao, 150); });
 
 /* ====================== Fluxo principal ====================== */
 async function iniciar(){
@@ -894,6 +1233,8 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
     document.querySelectorAll('.tab-content').forEach(c=>c.style.display='none');
     btn.classList.add('active');
     document.getElementById('tab-'+btn.dataset.tab).style.display='block';
+    esconderTip();
+    if (btn.dataset.tab === 'evolucao') renderEvolucao();
   });
 });
 
