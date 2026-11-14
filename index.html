@@ -460,6 +460,8 @@ function somarProvento(prov, t, iso, v){
   const ano = iso.slice(0,4);
   const ea = prov.anual.find(x => x.a.replace('*','') === ano);
   if (ea) ea.v = r2(ea.v + v); else prov.anual.push({a:ano, v:r2(v)});
+  // Detalhe mês × ativo (vindo da planilha), usado na evolução dos proventos.
+  if (Array.isArray(prov.lancamentos)) prov.lancamentos.push({m: iso.slice(0,7), t, v: r2(v), d: iso});
 }
 
 /** Cotas que você tinha no fechamento da data-com (desconta compras/vendas registradas depois). */
@@ -562,7 +564,7 @@ function calcular(cart, merc){
     if (!(v.total > 0)) continue;
     const h = cart.ativos[t];
     const base = h ? h.cotas * h.pm : 0;
-    proventosAtivo.push({t, total:v.total, pct: base ? r2(v.total / base * 100) : 0});
+    proventosAtivo.push({t, total:v.total, pct: base ? r2(v.total / base * 100) : null});
   }
 
   const monthly = prov.mensal.slice().sort((a,b) => mesLabelOrdem(a.m) - mesLabelOrdem(b.m)).slice(-12);
