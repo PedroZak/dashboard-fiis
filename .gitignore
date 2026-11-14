@@ -1,0 +1,12 @@
+# Este repositório é PÚBLICO: só código e dados de mercado.
+# Qualquer arquivo de carteira pessoal fica de fora, mesmo se cair nesta pasta por engano.
+carteira*.json
+holdings*.json
+historico_proventos*.json
+historico_indicadores*.json
+senha*.txt
+*.local.*
+
+.claude/
+__pycache__/
+*.pyc

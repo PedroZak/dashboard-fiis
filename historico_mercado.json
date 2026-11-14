@@ -1,0 +1,418 @@
+{
+ "ALZR11": [
+  {
+   "m": "nov/26",
+   "preco": 9.71,
+   "min52": 9.36,
+   "max52": 10.59,
+   "dy12m": 10.3553,
+   "pvp": 0.9007,
+   "dyCagr3": 2.9097,
+   "dyCagr5": -6.2285,
+   "vacancia": 0.0
+  }
+ ],
+ "BRCO11": [
+  {
+   "m": "nov/26",
+   "preco": 107.35,
+   "min52": 102.9,
+   "max52": 118.51,
+   "dy12m": 10.2841,
+   "pvp": 0.9345,
+   "dyCagr3": 1.2377,
+   "dyCagr5": 6.6004,
+   "vacancia": 1.6
+  }
+ ],
+ "BTLG11": [
+  {
+   "m": "nov/26",
+   "preco": 98.75,
+   "min52": 95.83,
+   "max52": 105.1,
+   "dy12m": 10.5823,
+   "pvp": 0.9226,
+   "dyCagr3": 1.4562,
+   "dyCagr5": 1.8361,
+   "vacancia": 2.16
+  }
+ ],
+ "CPTI11": [
+  {
+   "m": "nov/26",
+   "preco": 74.9,
+   "min52": 73.21,
+   "max52": 86.08,
+   "dy12m": 17.957276368491,
+   "pvp": null,
+   "dyCagr3": null,
+   "dyCagr5": null,
+   "vacancia": null
+  }
+ ],
+ "CPTS11": [
+  {
+   "m": "nov/26",
+   "preco": 6.88,
+   "min52": 6.74,
+   "max52": 7.94,
+   "dy12m": 14.3895,
+   "pvp": 0.7954,
+   "dyCagr3": 7.0244,
+   "dyCagr5": -3.5807,
+   "vacancia": null
+  }
+ ],
+ "HGCR11": [
+  {
+   "m": "nov/26",
+   "preco": 87.3,
+   "min52": 83.25,
+   "max52": 99.48,
+   "dy12m": 13.4021,
+   "pvp": 0.8963,
+   "dyCagr3": 0.5764,
+   "dyCagr5": -2.9362,
+   "vacancia": null
+  }
+ ],
+ "HGLG11": [
+  {
+   "m": "nov/26",
+   "preco": 146.02,
+   "min52": 144.62,
+   "max52": 159.66,
+   "dy12m": 9.2316,
+   "pvp": 0.8774,
+   "dyCagr3": 0.7021,
+   "dyCagr5": -3.4298,
+   "vacancia": 2.45
+  }
+ ],
+ "HGRU11": [
+  {
+   "m": "nov/26",
+   "preco": 115.47,
+   "min52": 111.3,
+   "max52": 132.9,
+   "dy12m": 10.3057,
+   "pvp": 0.9007,
+   "dyCagr3": -0.554,
+   "dyCagr5": 3.665,
+   "vacancia": 0.81
+  }
+ ],
+ "HSML11": [
+  {
+   "m": "nov/26",
+   "preco": 80.79,
+   "min52": 75.0,
+   "max52": 94.5,
+   "dy12m": 10.781,
+   "pvp": 0.8106,
+   "dyCagr3": -2.7158,
+   "dyCagr5": 3.4819,
+   "vacancia": null
+  }
+ ],
+ "IRDM11": [
+  {
+   "m": "nov/26",
+   "preco": 58.31,
+   "min52": 57.25,
+   "max52": 58.31,
+   "dy12m": 2.1438,
+   "pvp": 0.7417,
+   "dyCagr3": -0.5011,
+   "dyCagr5": -7.6471,
+   "vacancia": null
+  }
+ ],
+ "JURO11": [
+  {
+   "m": "nov/26",
+   "preco": 90.25,
+   "min52": 89.9,
+   "max52": 104.3,
+   "dy12m": 10.526315789474,
+   "pvp": null,
+   "dyCagr3": null,
+   "dyCagr5": null,
+   "vacancia": null
+  }
+ ],
+ "KDIF11": [
+  {
+   "m": "nov/26",
+   "preco": 106.9,
+   "min52": 104.2,
+   "max52": 124.3,
+   "dy12m": 14.4527595884,
+   "pvp": null,
+   "dyCagr3": null,
+   "dyCagr5": null,
+   "vacancia": null
+  }
+ ],
+ "KNCA11": [
+  {
+   "m": "nov/26",
+   "preco": 87.0,
+   "min52": 83.07,
+   "max52": 95.93,
+   "dy12m": 14.2184,
+   "pvp": 0.874,
+   "dyCagr3": -1.1068,
+   "dyCagr5": -0.8048,
+   "vacancia": null
+  }
+ ],
+ "KNCR11": [
+  {
+   "m": "nov/26",
+   "preco": 104.86,
+   "min52": 95.22,
+   "max52": 108.09,
+   "dy12m": 13.0555,
+   "pvp": 1.0216,
+   "dyCagr3": 4.8994,
+   "dyCagr5": 2.7216,
+   "vacancia": null
+  }
+ ],
+ "KNHY11": [
+  {
+   "m": "nov/26",
+   "preco": 92.44,
+   "min52": 88.05,
+   "max52": 101.1,
+   "dy12m": 13.241,
+   "pvp": 0.9343,
+   "dyCagr3": -2.238,
+   "dyCagr5": -2.5955,
+   "vacancia": null
+  }
+ ],
+ "KNIP11": [
+  {
+   "m": "nov/26",
+   "preco": 87.65,
+   "min52": 79.53,
+   "max52": 94.54,
+   "dy12m": 11.6372,
+   "pvp": 0.9521,
+   "dyCagr3": 0.3621,
+   "dyCagr5": -6.0833,
+   "vacancia": null
+  }
+ ],
+ "KNRI11": [
+  {
+   "m": "nov/26",
+   "preco": 151.79,
+   "min52": 137.14,
+   "max52": 167.88,
+   "dy12m": 8.7687,
+   "pvp": 0.9291,
+   "dyCagr3": 3.514,
+   "dyCagr5": 5.3842,
+   "vacancia": 0.08
+  }
+ ],
+ "KNSC11": [
+  {
+   "m": "nov/26",
+   "preco": 8.57,
+   "min52": 7.78,
+   "max52": 9.22,
+   "dy12m": 13.0688,
+   "pvp": 0.9817,
+   "dyCagr3": 3.8499,
+   "dyCagr5": -2.0624,
+   "vacancia": null
+  }
+ ],
+ "MXRF11": [
+  {
+   "m": "nov/26",
+   "preco": 8.75,
+   "min52": 8.39,
+   "max52": 9.92,
+   "dy12m": 13.6,
+   "pvp": 0.9449,
+   "dyCagr3": -0.4149,
+   "dyCagr5": -0.1672,
+   "vacancia": 0.0
+  }
+ ],
+ "PVBI11": [
+  {
+   "m": "nov/26",
+   "preco": 62.92,
+   "min52": 56.3,
+   "max52": 81.51,
+   "dy12m": 7.8036,
+   "pvp": 0.6019,
+   "dyCagr3": -14.1132,
+   "dyCagr5": -4.5583,
+   "vacancia": 31.94
+  }
+ ],
+ "RBRR11": [
+  {
+   "m": "nov/26",
+   "preco": 63.0,
+   "min52": 61.38,
+   "max52": 84.7,
+   "dy12m": 15.4762,
+   "pvp": 0.6855,
+   "dyCagr3": -0.1058,
+   "dyCagr5": -4.9025,
+   "vacancia": null
+  }
+ ],
+ "RECR11": [
+  {
+   "m": "nov/26",
+   "preco": 68.7,
+   "min52": 66.96,
+   "max52": 83.71,
+   "dy12m": 15.5459,
+   "pvp": 0.7944,
+   "dyCagr3": 0.8291,
+   "dyCagr5": -4.5596,
+   "vacancia": null
+  }
+ ],
+ "RZAG11": [
+  {
+   "m": "nov/26",
+   "preco": 7.78,
+   "min52": 7.74,
+   "max52": 8.87,
+   "dy12m": 19.2159,
+   "pvp": 0.8181,
+   "dyCagr3": 4.769,
+   "dyCagr5": 3.6279,
+   "vacancia": null
+  }
+ ],
+ "RZTR11": [
+  {
+   "m": "nov/26",
+   "preco": 67.49,
+   "min52": 66.04,
+   "max52": 92.18,
+   "dy12m": 16.8173,
+   "pvp": 0.6914,
+   "dyCagr3": -0.1464,
+   "dyCagr5": -5.424,
+   "vacancia": 0.0
+  }
+ ],
+ "SNAG11": [
+  {
+   "m": "nov/26",
+   "preco": 9.77,
+   "min52": 8.95,
+   "max52": 10.65,
+   "dy12m": 17.4002,
+   "pvp": 0.9692,
+   "dyCagr3": 8.3289,
+   "dyCagr5": 39.2373,
+   "vacancia": 0.0
+  }
+ ],
+ "TRBL11": [
+  {
+   "m": "nov/26",
+   "preco": 43.44,
+   "min52": 43.0,
+   "max52": 75.45,
+   "dy12m": 21.9153,
+   "pvp": 0.5665,
+   "dyCagr3": -0.6565,
+   "dyCagr5": 0.73,
+   "vacancia": 0.0
+  }
+ ],
+ "VGHF11": [
+  {
+   "m": "nov/26",
+   "preco": 4.01,
+   "min52": 3.88,
+   "max52": 6.83,
+   "dy12m": 19.7007,
+   "pvp": 0.4878,
+   "dyCagr3": -10.7172,
+   "dyCagr5": -13.2718,
+   "vacancia": null
+  }
+ ],
+ "VGIA11": [
+  {
+   "m": "nov/26",
+   "preco": 8.31,
+   "min52": 7.38,
+   "max52": 9.83,
+   "dy12m": 19.1336,
+   "pvp": 0.862,
+   "dyCagr3": 6.3516,
+   "dyCagr5": 2.7203,
+   "vacancia": null
+  }
+ ],
+ "VISC11": [
+  {
+   "m": "nov/26",
+   "preco": 98.6,
+   "min52": 95.81,
+   "max52": 114.2,
+   "dy12m": 10.1623,
+   "pvp": 0.8529,
+   "dyCagr3": -3.4414,
+   "dyCagr5": 3.3938,
+   "vacancia": 5.78
+  }
+ ],
+ "XPCA11": [
+  {
+   "m": "nov/26",
+   "preco": 6.79,
+   "min52": 6.73,
+   "max52": 8.25,
+   "dy12m": 18.5567,
+   "pvp": 0.7058,
+   "dyCagr3": 2.6475,
+   "dyCagr5": -1.0755,
+   "vacancia": null
+  }
+ ],
+ "XPLG11": [
+  {
+   "m": "nov/26",
+   "preco": 90.9,
+   "min52": 87.49,
+   "max52": 102.25,
+   "dy12m": 10.8251,
+   "pvp": 0.8655,
+   "dyCagr3": 1.681,
+   "dyCagr5": 3.7137,
+   "vacancia": 16.5
+  }
+ ],
+ "XPML11": [
+  {
+   "m": "nov/26",
+   "preco": 92.0,
+   "min52": 89.51,
+   "max52": 111.25,
+   "dy12m": 12.0,
+   "pvp": 0.8355,
+   "dyCagr3": 0.4263,
+   "dyCagr5": 6.5739,
+   "vacancia": null
+  }
+ ]
+}

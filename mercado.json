@@ -1,0 +1,2732 @@
+{
+ "geradoEm": "2026-11-14T16:34:00-03:00",
+ "fontes": "fiis.com.br, Yahoo Finance, Fundamentus",
+ "ativos": {
+  "ALZR11": {
+   "nome": "Alianza Trust Renda Imobiliária",
+   "preco": 9.71,
+   "precoData": "2026-11-13",
+   "min52": 9.36,
+   "max52": 10.59,
+   "dy12m": 10.3553,
+   "pvp": 0.9007,
+   "vpa": 10.78,
+   "dyCagr3": 2.9097,
+   "dyCagr5": -6.2285,
+   "proventos": [
+    {
+     "comp": "10/2026",
+     "valor": 0.08,
+     "dataCom": "2026-10-16",
+     "pagamento": "2026-10-23"
+    },
+    {
+     "comp": "09/2026",
+     "valor": 0.08,
+     "dataCom": "2026-09-18",
+     "pagamento": "2026-09-25"
+    },
+    {
+     "comp": "08/2026",
+     "valor": 0.08,
+     "dataCom": "2026-08-18",
+     "pagamento": "2026-08-25"
+    },
+    {
+     "comp": "07/2026",
+     "valor": 0.08,
+     "dataCom": "2026-07-17",
+     "pagamento": "2026-07-24"
+    },
+    {
+     "comp": "06/2026",
+     "valor": 0.08,
+     "dataCom": "2026-06-18",
+     "pagamento": "2026-06-25"
+    },
+    {
+     "comp": "05/2026",
+     "valor": 0.08,
+     "dataCom": "2026-05-18",
+     "pagamento": "2026-05-25"
+    },
+    {
+     "comp": "04/2026",
+     "valor": 0.08,
+     "dataCom": "2026-04-16",
+     "pagamento": "2026-04-24"
+    },
+    {
+     "comp": "03/2026",
+     "valor": 0.08,
+     "dataCom": "2026-03-18",
+     "pagamento": "2026-03-25"
+    },
+    {
+     "comp": "02/2026",
+     "valor": 0.08,
+     "dataCom": "2026-02-18",
+     "pagamento": "2026-02-25"
+    },
+    {
+     "comp": "01/2026",
+     "valor": 0.09,
+     "dataCom": "2026-01-16",
+     "pagamento": "2026-01-23"
+    },
+    {
+     "comp": "12/2025",
+     "valor": 0.08,
+     "dataCom": "2025-12-16",
+     "pagamento": "2025-12-23"
+    },
+    {
+     "comp": "11/2025",
+     "valor": 0.08,
+     "dataCom": "2025-11-17",
+     "pagamento": "2025-11-25"
+    }
+   ],
+   "precoFonte": "Yahoo",
+   "vacancia": 0.0
+  },
+  "BRCO11": {
+   "nome": "FII BRESCO",
+   "preco": 107.35,
+   "precoData": "2026-11-13",
+   "min52": 102.9,
+   "max52": 118.51,
+   "dy12m": 10.2841,
+   "pvp": 0.9345,
+   "vpa": 114.87,
+   "dyCagr3": 1.2377,
+   "dyCagr5": 6.6004,
+   "proventos": [
+    {
+     "comp": "10/2026",
+     "valor": 0.91,
+     "dataCom": "2026-10-30",
+     "pagamento": "2026-11-16"
+    },
+    {
+     "comp": "09/2026",
+     "valor": 0.91,
+     "dataCom": "2026-09-30",
+     "pagamento": "2026-10-15"
+    },
+    {
+     "comp": "08/2026",
+     "valor": 0.91,
+     "dataCom": "2026-08-31",
+     "pagamento": "2026-09-15"
+    },
+    {
+     "comp": "07/2026",
+     "valor": 0.91,
+     "dataCom": "2026-07-31",
+     "pagamento": "2026-08-14"
+    },
+    {
+     "comp": "06/2026",
+     "valor": 1.05,
+     "dataCom": "2026-06-30",
+     "pagamento": "2026-07-14"
+    },
+    {
+     "comp": "05/2026",
+     "valor": 0.95,
+     "dataCom": "2026-05-29",
+     "pagamento": "2026-06-15"
+    },
+    {
+     "comp": "04/2026",
+     "valor": 0.95,
+     "dataCom": "2026-04-30",
+     "pagamento": "2026-05-15"
+    },
+    {
+     "comp": "03/2026",
+     "valor": 0.92,
+     "dataCom": "2026-03-31",
+     "pagamento": "2026-04-15"
+    },
+    {
+     "comp": "02/2026",
+     "valor": 0.92,
+     "dataCom": "2026-02-27",
+     "pagamento": "2026-03-13"
+    },
+    {
+     "comp": "01/2026",
+     "valor": 0.87,
+     "dataCom": "2026-01-30",
+     "pagamento": "2026-02-13"
+    },
+    {
+     "comp": "12/2025",
+     "valor": 0.87,
+     "dataCom": "2025-12-30",
+     "pagamento": "2026-01-15"
+    },
+    {
+     "comp": "11/2025",
+     "valor": 0.87,
+     "dataCom": "2025-11-28",
+     "pagamento": "2025-12-12"
+    }
+   ],
+   "precoFonte": "Yahoo",
+   "vacancia": 1.6
+  },
+  "BTLG11": {
+   "nome": "FII BTLG",
+   "preco": 98.75,
+   "precoData": "2026-11-13",
+   "min52": 95.83,
+   "max52": 105.1,
+   "dy12m": 10.5823,
+   "pvp": 0.9226,
+   "vpa": 107.04,
+   "dyCagr3": 1.4562,
+   "dyCagr5": 1.8361,
+   "proventos": [
+    {
+     "comp": "10/2026",
+     "valor": 0.81,
+     "dataCom": "2026-10-15",
+     "pagamento": "2026-10-23"
+    },
+    {
+     "comp": "09/2026",
+     "valor": 0.81,
+     "dataCom": "2026-09-15",
+     "pagamento": "2026-09-25"
+    },
+    {
+     "comp": "08/2026",
+     "valor": 0.81,
+     "dataCom": "2026-08-14",
+     "pagamento": "2026-08-25"
+    },
+    {
+     "comp": "07/2026",
+     "valor": 0.81,
+     "dataCom": "2026-07-15",
+     "pagamento": "2026-07-24"
+    },
+    {
+     "comp": "06/2026",
+     "valor": 0.81,
+     "dataCom": "2026-06-15",
+     "pagamento": "2026-06-25"
+    },
+    {
+     "comp": "05/2026",
+     "valor": 0.81,
+     "dataCom": "2026-05-15",
+     "pagamento": "2026-05-25"
+    },
+    {
+     "comp": "04/2026",
+     "valor": 0.81,
+     "dataCom": "2026-04-15",
+     "pagamento": "2026-04-24"
+    },
+    {
+     "comp": "03/2026",
+     "valor": 0.8,
+     "dataCom": "2026-03-13",
+     "pagamento": "2026-03-25"
+    },
+    {
+     "comp": "02/2026",
+     "valor": 0.8,
+     "dataCom": "2026-02-13",
+     "pagamento": "2026-02-25"
+    },
+    {
+     "comp": "01/2026",
+     "valor": 0.79,
+     "dataCom": "2026-01-15",
+     "pagamento": "2026-01-23"
+    },
+    {
+     "comp": "12/2025",
+     "valor": 0.79,
+     "dataCom": "2025-12-15",
+     "pagamento": "2025-12-23"
+    }
+   ],
+   "precoFonte": "Yahoo",
+   "vacancia": 2.16
+  },
+  "CPTI11": {
+   "nome": "FIC IE CAP",
+   "preco": 74.9,
+   "precoData": "2026-11-13",
+   "min52": 73.21,
+   "max52": 86.08,
+   "dy12m": 17.957276368491,
+   "pvp": null,
+   "vpa": null,
+   "dyCagr3": null,
+   "dyCagr5": null,
+   "proventos": [
+    {
+     "comp": "10/2026",
+     "valor": 1.1,
+     "dataCom": "2026-10-30",
+     "pagamento": "2026-11-16"
+    },
+    {
+     "comp": "09/2026",
+     "valor": 1.15,
+     "dataCom": "2026-09-30",
+     "pagamento": "2026-10-15"
+    },
+    {
+     "comp": "08/2026",
+     "valor": 1.15,
+     "dataCom": "2026-08-31",
+     "pagamento": "2026-09-15"
+    },
+    {
+     "comp": "08/2026",
+     "valor": 1.15,
+     "dataCom": "2026-08-03",
+     "pagamento": "2026-08-14"
+    },
+    {
+     "comp": "06/2026",
+     "valor": 1.15,
+     "dataCom": "2026-06-30",
+     "pagamento": "2026-07-14"
+    },
+    {
+     "comp": "05/2026",
+     "valor": 1.15,
+     "dataCom": "2026-05-29",
+     "pagamento": "2026-06-15"
+    },
+    {
+     "comp": "04/2026",
+     "valor": 1.15,
+     "dataCom": "2026-04-30",
+     "pagamento": "2026-05-15"
+    },
+    {
+     "comp": "03/2026",
+     "valor": 1.15,
+     "dataCom": "2026-03-31",
+     "pagamento": "2026-04-15"
+    },
+    {
+     "comp": "02/2026",
+     "valor": 1.15,
+     "dataCom": "2026-02-27",
+     "pagamento": "2026-03-13"
+    },
+    {
+     "comp": "01/2026",
+     "valor": 1.15,
+     "dataCom": "2026-01-30",
+     "pagamento": "2026-02-13"
+    },
+    {
+     "comp": "12/2025",
+     "valor": 1.0,
+     "dataCom": "2025-12-30",
+     "pagamento": "2026-01-15"
+    },
+    {
+     "comp": "11/2025",
+     "valor": 1.0,
+     "dataCom": "2025-11-28",
+     "pagamento": "2025-12-12"
+    }
+   ],
+   "precoFonte": "Yahoo",
+   "vacancia": null
+  },
+  "CPTS11": {
+   "nome": "Capitania Securities II",
+   "preco": 6.88,
+   "precoData": "2026-11-13",
+   "min52": 6.74,
+   "max52": 7.94,
+   "dy12m": 14.3895,
+   "pvp": 0.7954,
+   "vpa": 8.65,
+   "dyCagr3": 7.0244,
+   "dyCagr5": -3.5807,
+   "proventos": [
+    {
+     "comp": "10/2026",
+     "valor": 0.09,
+     "dataCom": "2026-10-15",
+     "pagamento": "2026-10-22"
+    },
+    {
+     "comp": "09/2026",
+     "valor": 0.09,
+     "dataCom": "2026-09-15",
+     "pagamento": "2026-09-22"
+    },
+    {
+     "comp": "08/2026",
+     "valor": 0.09,
+     "dataCom": "2026-08-14",
+     "pagamento": "2026-08-21"
+    },
+    {
+     "comp": "07/2026",
+     "valor": 0.09,
+     "dataCom": "2026-07-14",
+     "pagamento": "2026-07-21"
+    },
+    {
+     "comp": "06/2026",
+     "valor": 0.09,
+     "dataCom": "2026-06-15",
+     "pagamento": "2026-06-22"
+    },
+    {
+     "comp": "05/2026",
+     "valor": 0.09,
+     "dataCom": "2026-05-13",
+     "pagamento": "2026-05-20"
+    },
+    {
+     "comp": "04/2026",
+     "valor": 0.09,
+     "dataCom": "2026-04-13",
+     "pagamento": "2026-04-20"
+    },
+    {
+     "comp": "03/2026",
+     "valor": 0.09,
+     "dataCom": "2026-03-11",
+     "pagamento": "2026-03-18"
+    },
+    {
+     "comp": "02/2026",
+     "valor": 0.09,
+     "dataCom": "2026-02-11",
+     "pagamento": "2026-02-20"
+    },
+    {
+     "comp": "01/2026",
+     "valor": 0.09,
+     "dataCom": "2026-01-13",
+     "pagamento": "2026-01-20"
+    },
+    {
+     "comp": "12/2025",
+     "valor": 0.09,
+     "dataCom": "2025-12-10",
+     "pagamento": "2025-12-17"
+    }
+   ],
+   "precoFonte": "Yahoo",
+   "vacancia": null
+  },
+  "HGCR11": {
+   "nome": "PÁTRIA RECEBÍVEIS IMOBILIÁRIOS",
+   "preco": 87.3,
+   "precoData": "2026-11-13",
+   "min52": 83.25,
+   "max52": 99.48,
+   "dy12m": 13.4021,
+   "pvp": 0.8963,
+   "vpa": 97.4,
+   "dyCagr3": 0.5764,
+   "dyCagr5": -2.9362,
+   "proventos": [
+    {
+     "comp": "10/2026",
+     "valor": 1.0,
+     "dataCom": "2026-10-30",
+     "pagamento": "2026-11-16"
+    },
+    {
+     "comp": "09/2026",
+     "valor": 1.0,
+     "dataCom": "2026-09-30",
+     "pagamento": "2026-10-15"
+    },
+    {
+     "comp": "08/2026",
+     "valor": 1.0,
+     "dataCom": "2026-08-31",
+     "pagamento": "2026-09-15"
+    },
+    {
+     "comp": "07/2026",
+     "valor": 1.0,
+     "dataCom": "2026-07-31",
+     "pagamento": "2026-08-14"
+    },
+    {
+     "comp": "06/2026",
+     "valor": 0.95,
+     "dataCom": "2026-06-30",
+     "pagamento": "2026-07-14"
+    },
+    {
+     "comp": "05/2026",
+     "valor": 0.95,
+     "dataCom": "2026-05-29",
+     "pagamento": "2026-06-15"
+    },
+    {
+     "comp": "04/2026",
+     "valor": 0.95,
+     "dataCom": "2026-04-30",
+     "pagamento": "2026-05-15"
+    },
+    {
+     "comp": "03/2026",
+     "valor": 0.95,
+     "dataCom": "2026-03-31",
+     "pagamento": "2026-04-15"
+    },
+    {
+     "comp": "02/2026",
+     "valor": 0.95,
+     "dataCom": "2026-02-27",
+     "pagamento": "2026-03-13"
+    },
+    {
+     "comp": "01/2026",
+     "valor": 0.95,
+     "dataCom": "2026-01-30",
+     "pagamento": "2026-02-13"
+    },
+    {
+     "comp": "12/2025",
+     "valor": 1.0,
+     "dataCom": "2025-12-30",
+     "pagamento": "2026-01-15"
+    },
+    {
+     "comp": "11/2025",
+     "valor": 1.0,
+     "dataCom": "2025-11-28",
+     "pagamento": "2025-12-12"
+    }
+   ],
+   "precoFonte": "Yahoo",
+   "vacancia": null
+  },
+  "HGLG11": {
+   "nome": "PÁTRIA LOG",
+   "preco": 146.02,
+   "precoData": "2026-11-13",
+   "min52": 144.62,
+   "max52": 159.66,
+   "dy12m": 9.2316,
+   "pvp": 0.8774,
+   "vpa": 166.43,
+   "dyCagr3": 0.7021,
+   "dyCagr5": -3.4298,
+   "proventos": [
+    {
+     "comp": "10/2026",
+     "valor": 1.17,
+     "dataCom": "2026-10-30",
+     "pagamento": "2026-11-16"
+    },
+    {
+     "comp": "09/2026",
+     "valor": 1.17,
+     "dataCom": "2026-09-30",
+     "pagamento": "2026-10-15"
+    },
+    {
+     "comp": "08/2026",
+     "valor": 1.17,
+     "dataCom": "2026-08-31",
+     "pagamento": "2026-09-15"
+    },
+    {
+     "comp": "07/2026",
+     "valor": 1.17,
+     "dataCom": "2026-07-31",
+     "pagamento": "2026-08-14"
+    },
+    {
+     "comp": "06/2026",
+     "valor": 1.1,
+     "dataCom": "2026-06-30",
+     "pagamento": "2026-07-14"
+    },
+    {
+     "comp": "05/2026",
+     "valor": 1.1,
+     "dataCom": "2026-05-29",
+     "pagamento": "2026-06-15"
+    },
+    {
+     "comp": "04/2026",
+     "valor": 1.1,
+     "dataCom": "2026-04-30",
+     "pagamento": "2026-05-15"
+    },
+    {
+     "comp": "03/2026",
+     "valor": 1.1,
+     "dataCom": "2026-03-31",
+     "pagamento": "2026-04-15"
+    },
+    {
+     "comp": "02/2026",
+     "valor": 1.1,
+     "dataCom": "2026-02-27",
+     "pagamento": "2026-03-13"
+    },
+    {
+     "comp": "01/2026",
+     "valor": 1.1,
+     "dataCom": "2026-01-30",
+     "pagamento": "2026-02-13"
+    },
+    {
+     "comp": "12/2025",
+     "valor": 1.1,
+     "dataCom": "2025-12-30",
+     "pagamento": "2026-01-15"
+    },
+    {
+     "comp": "11/2025",
+     "valor": 1.1,
+     "dataCom": "2025-11-28",
+     "pagamento": "2025-12-12"
+    }
+   ],
+   "precoFonte": "Yahoo",
+   "vacancia": 2.45
+  },
+  "HGRU11": {
+   "nome": "PÁTRIA RENDA URBANA",
+   "preco": 115.47,
+   "precoData": "2026-11-13",
+   "min52": 111.3,
+   "max52": 132.9,
+   "dy12m": 10.3057,
+   "pvp": 0.9007,
+   "vpa": 128.2,
+   "dyCagr3": -0.554,
+   "dyCagr5": 3.665,
+   "proventos": [
+    {
+     "comp": "10/2026",
+     "valor": 0.95,
+     "dataCom": "2026-10-30",
+     "pagamento": "2026-11-16"
+    },
+    {
+     "comp": "09/2026",
+     "valor": 0.95,
+     "dataCom": "2026-09-30",
+     "pagamento": "2026-10-15"
+    },
+    {
+     "comp": "08/2026",
+     "valor": 0.95,
+     "dataCom": "2026-08-31",
+     "pagamento": "2026-09-15"
+    },
+    {
+     "comp": "07/2026",
+     "valor": 0.95,
+     "dataCom": "2026-07-31",
+     "pagamento": "2026-08-14"
+    },
+    {
+     "comp": "06/2026",
+     "valor": 0.95,
+     "dataCom": "2026-06-30",
+     "pagamento": "2026-07-14"
+    },
+    {
+     "comp": "05/2026",
+     "valor": 0.95,
+     "dataCom": "2026-05-29",
+     "pagamento": "2026-06-15"
+    },
+    {
+     "comp": "04/2026",
+     "valor": 0.95,
+     "dataCom": "2026-04-30",
+     "pagamento": "2026-05-15"
+    },
+    {
+     "comp": "03/2026",
+     "valor": 0.95,
+     "dataCom": "2026-03-31",
+     "pagamento": "2026-04-15"
+    },
+    {
+     "comp": "02/2026",
+     "valor": 0.95,
+     "dataCom": "2026-02-27",
+     "pagamento": "2026-03-13"
+    },
+    {
+     "comp": "01/2026",
+     "valor": 0.95,
+     "dataCom": "2026-01-30",
+     "pagamento": "2026-02-13"
+    },
+    {
+     "comp": "12/2025",
+     "valor": 1.45,
+     "dataCom": "2025-12-30",
+     "pagamento": "2026-01-15"
+    },
+    {
+     "comp": "11/2025",
+     "valor": 0.95,
+     "dataCom": "2025-11-28",
+     "pagamento": "2025-12-12"
+    }
+   ],
+   "precoFonte": "Yahoo",
+   "vacancia": 0.81
+  },
+  "HSML11": {
+   "nome": "FII HSI MALL",
+   "preco": 80.79,
+   "precoData": "2026-11-13",
+   "min52": 75.0,
+   "max52": 94.5,
+   "dy12m": 10.781,
+   "pvp": 0.8106,
+   "vpa": 99.67,
+   "dyCagr3": -2.7158,
+   "dyCagr5": 3.4819,
+   "proventos": [
+    {
+     "comp": "10/2026",
+     "valor": 0.75,
+     "dataCom": "2026-10-30",
+     "pagamento": "2026-11-09"
+    },
+    {
+     "comp": "09/2026",
+     "valor": 0.75,
+     "dataCom": "2026-09-30",
+     "pagamento": "2026-10-07"
+    },
+    {
+     "comp": "08/2026",
+     "valor": 0.75,
+     "dataCom": "2026-08-31",
+     "pagamento": "2026-09-08"
+    },
+    {
+     "comp": "07/2026",
+     "valor": 0.75,
+     "dataCom": "2026-07-31",
+     "pagamento": "2026-08-07"
+    },
+    {
+     "comp": "06/2026",
+     "valor": 0.75,
+     "dataCom": "2026-06-30",
+     "pagamento": "2026-07-07"
+    },
+    {
+     "comp": "05/2026",
+     "valor": 0.75,
+     "dataCom": "2026-05-29",
+     "pagamento": "2026-06-08"
+    },
+    {
+     "comp": "04/2026",
+     "valor": 0.71,
+     "dataCom": "2026-04-30",
+     "pagamento": "2026-05-08"
+    },
+    {
+     "comp": "03/2026",
+     "valor": 0.7,
+     "dataCom": "2026-03-31",
+     "pagamento": "2026-04-08"
+    },
+    {
+     "comp": "02/2026",
+     "valor": 0.7,
+     "dataCom": "2026-02-27",
+     "pagamento": "2026-03-06"
+    },
+    {
+     "comp": "01/2026",
+     "valor": 0.7,
+     "dataCom": "2026-01-30",
+     "pagamento": "2026-02-06"
+    },
+    {
+     "comp": "12/2025",
+     "valor": 0.7,
+     "dataCom": "2025-12-30",
+     "pagamento": "2026-01-08"
+    },
+    {
+     "comp": "11/2025",
+     "valor": 0.7,
+     "dataCom": "2025-11-28",
+     "pagamento": "2025-12-05"
+    }
+   ],
+   "precoFonte": "Yahoo",
+   "vacancia": null
+  },
+  "IRDM11": {
+   "nome": "Iridium Recebíveis Imobiliários",
+   "preco": 58.31,
+   "precoData": "2025-10-24",
+   "min52": 57.25,
+   "max52": 58.31,
+   "dy12m": 2.1438,
+   "pvp": 0.7417,
+   "vpa": 78.62,
+   "dyCagr3": -0.5011,
+   "dyCagr5": -7.6471,
+   "proventos": [],
+   "precoFonte": "fiis.com.br",
+   "vacancia": null
+  },
+  "JURO11": {
+   "nome": "SPARTA INFRA",
+   "preco": 90.25,
+   "precoData": "2026-11-13",
+   "min52": 89.9,
+   "max52": 104.3,
+   "dy12m": 10.526315789474,
+   "pvp": null,
+   "vpa": null,
+   "dyCagr3": null,
+   "dyCagr5": null,
+   "proventos": [
+    {
+     "comp": "10/2026",
+     "valor": 0.75,
+     "dataCom": "2026-10-30",
+     "pagamento": "2026-11-16"
+    },
+    {
+     "comp": "09/2026",
+     "valor": 0.75,
+     "dataCom": "2026-09-30",
+     "pagamento": "2026-10-15"
+    },
+    {
+     "comp": "08/2026",
+     "valor": 1.0,
+     "dataCom": "2026-08-31",
+     "pagamento": "2026-09-15"
+    },
+    {
+     "comp": "07/2026",
+     "valor": 0.75,
+     "dataCom": "2026-07-31",
+     "pagamento": "2026-08-14"
+    },
+    {
+     "comp": "05/2026",
+     "valor": 0.5,
+     "dataCom": "2026-05-29",
+     "pagamento": "2026-06-15"
+    },
+    {
+     "comp": "04/2026",
+     "valor": 0.75,
+     "dataCom": "2026-04-30",
+     "pagamento": "2026-05-15"
+    },
+    {
+     "comp": "03/2026",
+     "valor": 1.0,
+     "dataCom": "2026-03-31",
+     "pagamento": "2026-04-15"
+    },
+    {
+     "comp": "02/2026",
+     "valor": 1.0,
+     "dataCom": "2026-02-27",
+     "pagamento": "2026-03-13"
+    },
+    {
+     "comp": "01/2026",
+     "valor": 1.0,
+     "dataCom": "2026-01-30",
+     "pagamento": "2026-02-13"
+    },
+    {
+     "comp": "12/2025",
+     "valor": 1.0,
+     "dataCom": "2025-12-30",
+     "pagamento": "2026-01-15"
+    },
+    {
+     "comp": "11/2025",
+     "valor": 1.0,
+     "dataCom": "2025-11-28",
+     "pagamento": "2025-12-12"
+    }
+   ],
+   "precoFonte": "Yahoo",
+   "vacancia": null
+  },
+  "KDIF11": {
+   "nome": "KINEA INFRAF",
+   "preco": 106.9,
+   "precoData": "2026-11-13",
+   "min52": 104.2,
+   "max52": 124.3,
+   "dy12m": 14.4527595884,
+   "pvp": null,
+   "vpa": null,
+   "dyCagr3": null,
+   "dyCagr5": null,
+   "proventos": [
+    {
+     "comp": "10/2026",
+     "valor": 1.15,
+     "dataCom": "2026-10-30",
+     "pagamento": "2026-11-09"
+    },
+    {
+     "comp": "09/2026",
+     "valor": 1.0,
+     "dataCom": "2026-09-30",
+     "pagamento": "2026-10-07"
+    },
+    {
+     "comp": "08/2026",
+     "valor": 1.0,
+     "dataCom": "2026-08-31",
+     "pagamento": "2026-09-08"
+    },
+    {
+     "comp": "07/2026",
+     "valor": 1.0,
+     "dataCom": "2026-07-31",
+     "pagamento": "2026-08-07"
+    },
+    {
+     "comp": "06/2026",
+     "valor": 1.45,
+     "dataCom": "2026-06-30",
+     "pagamento": "2026-07-07"
+    },
+    {
+     "comp": "05/2026",
+     "valor": 1.45,
+     "dataCom": "2026-05-29",
+     "pagamento": "2026-06-08"
+    },
+    {
+     "comp": "04/2026",
+     "valor": 1.45,
+     "dataCom": "2026-04-30",
+     "pagamento": "2026-05-08"
+    },
+    {
+     "comp": "03/2026",
+     "valor": 1.45,
+     "dataCom": "2026-03-31",
+     "pagamento": "2026-04-08"
+    },
+    {
+     "comp": "02/2026",
+     "valor": 1.45,
+     "dataCom": "2026-02-27",
+     "pagamento": "2026-03-06"
+    },
+    {
+     "comp": "01/2026",
+     "valor": 1.45,
+     "dataCom": "2026-01-30",
+     "pagamento": "2026-02-06"
+    },
+    {
+     "comp": "12/2025",
+     "valor": 1.45,
+     "dataCom": "2025-12-30",
+     "pagamento": "2026-01-08"
+    },
+    {
+     "comp": "11/2025",
+     "valor": 1.15,
+     "dataCom": "2025-11-28",
+     "pagamento": "2025-12-05"
+    }
+   ],
+   "precoFonte": "Yahoo",
+   "vacancia": null
+  },
+  "KNCA11": {
+   "nome": "FIAGRO KINEA",
+   "preco": 87.0,
+   "precoData": "2026-11-13",
+   "min52": 83.07,
+   "max52": 95.93,
+   "dy12m": 14.2184,
+   "pvp": 0.874,
+   "vpa": 99.54,
+   "dyCagr3": -1.1068,
+   "dyCagr5": -0.8048,
+   "proventos": [
+    {
+     "comp": "10/2026",
+     "valor": 1.0,
+     "dataCom": "2026-10-30",
+     "pagamento": "2026-11-13"
+    },
+    {
+     "comp": "09/2026",
+     "valor": 0.93,
+     "dataCom": "2026-09-30",
+     "pagamento": "2026-10-14"
+    },
+    {
+     "comp": "08/2026",
+     "valor": 0.85,
+     "dataCom": "2026-08-31",
+     "pagamento": "2026-09-14"
+    },
+    {
+     "comp": "07/2026",
+     "valor": 1.0,
+     "dataCom": "2026-07-31",
+     "pagamento": "2026-08-13"
+    },
+    {
+     "comp": "06/2026",
+     "valor": 1.13,
+     "dataCom": "2026-06-30",
+     "pagamento": "2026-07-13"
+    },
+    {
+     "comp": "05/2026",
+     "valor": 1.1,
+     "dataCom": "2026-05-29",
+     "pagamento": "2026-06-12"
+    },
+    {
+     "comp": "04/2026",
+     "valor": 1.1,
+     "dataCom": "2026-04-30",
+     "pagamento": "2026-05-14"
+    },
+    {
+     "comp": "03/2026",
+     "valor": 0.95,
+     "dataCom": "2026-03-31",
+     "pagamento": "2026-04-14"
+    },
+    {
+     "comp": "02/2026",
+     "valor": 1.0,
+     "dataCom": "2026-02-27",
+     "pagamento": "2026-03-12"
+    },
+    {
+     "comp": "01/2026",
+     "valor": 1.1,
+     "dataCom": "2026-01-30",
+     "pagamento": "2026-02-12"
+    },
+    {
+     "comp": "12/2025",
+     "valor": 1.2,
+     "dataCom": "2025-12-30",
+     "pagamento": "2026-01-14"
+    },
+    {
+     "comp": "11/2025",
+     "valor": 1.01,
+     "dataCom": "2025-11-28",
+     "pagamento": "2025-12-11"
+    }
+   ],
+   "precoFonte": "Yahoo",
+   "vacancia": null
+  },
+  "KNCR11": {
+   "nome": "Kinea Rendimentos Imobiliários",
+   "preco": 104.86,
+   "precoData": "2026-11-13",
+   "min52": 95.22,
+   "max52": 108.09,
+   "dy12m": 13.0555,
+   "pvp": 1.0216,
+   "vpa": 102.64,
+   "dyCagr3": 4.8994,
+   "dyCagr5": 2.7216,
+   "proventos": [
+    {
+     "comp": "10/2026",
+     "valor": 1.1,
+     "dataCom": "2026-10-30",
+     "pagamento": "2026-11-13"
+    },
+    {
+     "comp": "09/2026",
+     "valor": 1.13,
+     "dataCom": "2026-09-30",
+     "pagamento": "2026-10-14"
+    },
+    {
+     "comp": "08/2026",
+     "valor": 1.15,
+     "dataCom": "2026-08-31",
+     "pagamento": "2026-09-14"
+    },
+    {
+     "comp": "07/2026",
+     "valor": 1.25,
+     "dataCom": "2026-07-31",
+     "pagamento": "2026-08-13"
+    },
+    {
+     "comp": "06/2026",
+     "valor": 1.1,
+     "dataCom": "2026-06-30",
+     "pagamento": "2026-07-13"
+    },
+    {
+     "comp": "05/2026",
+     "valor": 1.1,
+     "dataCom": "2026-05-29",
+     "pagamento": "2026-06-12"
+    },
+    {
+     "comp": "04/2026",
+     "valor": 1.1,
+     "dataCom": "2026-04-30",
+     "pagamento": "2026-05-14"
+    },
+    {
+     "comp": "03/2026",
+     "valor": 1.15,
+     "dataCom": "2026-03-31",
+     "pagamento": "2026-04-14"
+    },
+    {
+     "comp": "02/2026",
+     "valor": 1.0,
+     "dataCom": "2026-02-27",
+     "pagamento": "2026-03-12"
+    },
+    {
+     "comp": "01/2026",
+     "valor": 1.2,
+     "dataCom": "2026-01-30",
+     "pagamento": "2026-02-12"
+    },
+    {
+     "comp": "12/2025",
+     "valor": 1.3,
+     "dataCom": "2025-12-30",
+     "pagamento": "2026-01-14"
+    },
+    {
+     "comp": "11/2025",
+     "valor": 1.11,
+     "dataCom": "2025-11-28",
+     "pagamento": "2025-12-11"
+    }
+   ],
+   "precoFonte": "Yahoo",
+   "vacancia": null
+  },
+  "KNHY11": {
+   "nome": "Kinea High Yield CRI",
+   "preco": 92.44,
+   "precoData": "2026-11-13",
+   "min52": 88.05,
+   "max52": 101.1,
+   "dy12m": 13.241,
+   "pvp": 0.9343,
+   "vpa": 98.94,
+   "dyCagr3": -2.238,
+   "dyCagr5": -2.5955,
+   "proventos": [
+    {
+     "comp": "10/2026",
+     "valor": 0.86,
+     "dataCom": "2026-10-30",
+     "pagamento": "2026-11-13"
+    },
+    {
+     "comp": "09/2026",
+     "valor": 0.7,
+     "dataCom": "2026-09-30",
+     "pagamento": "2026-10-14"
+    },
+    {
+     "comp": "08/2026",
+     "valor": 0.9,
+     "dataCom": "2026-08-31",
+     "pagamento": "2026-09-14"
+    },
+    {
+     "comp": "07/2026",
+     "valor": 1.2,
+     "dataCom": "2026-07-31",
+     "pagamento": "2026-08-13"
+    },
+    {
+     "comp": "06/2026",
+     "valor": 1.2,
+     "dataCom": "2026-06-30",
+     "pagamento": "2026-07-13"
+    },
+    {
+     "comp": "05/2026",
+     "valor": 1.3,
+     "dataCom": "2026-05-29",
+     "pagamento": "2026-06-12"
+    },
+    {
+     "comp": "04/2026",
+     "valor": 1.15,
+     "dataCom": "2026-04-30",
+     "pagamento": "2026-05-14"
+    },
+    {
+     "comp": "03/2026",
+     "valor": 1.1,
+     "dataCom": "2026-03-31",
+     "pagamento": "2026-04-14"
+    },
+    {
+     "comp": "02/2026",
+     "valor": 0.9,
+     "dataCom": "2026-02-27",
+     "pagamento": "2026-03-12"
+    },
+    {
+     "comp": "01/2026",
+     "valor": 0.96,
+     "dataCom": "2026-01-30",
+     "pagamento": "2026-02-12"
+    },
+    {
+     "comp": "12/2025",
+     "valor": 1.0,
+     "dataCom": "2025-12-30",
+     "pagamento": "2026-01-14"
+    },
+    {
+     "comp": "11/2025",
+     "valor": 0.97,
+     "dataCom": "2025-11-28",
+     "pagamento": "2025-12-11"
+    }
+   ],
+   "precoFonte": "Yahoo",
+   "vacancia": null
+  },
+  "KNIP11": {
+   "nome": "Kinea Índice de Preços",
+   "preco": 87.65,
+   "precoData": "2026-11-13",
+   "min52": 79.53,
+   "max52": 94.54,
+   "dy12m": 11.6372,
+   "pvp": 0.9521,
+   "vpa": 92.06,
+   "dyCagr3": 0.3621,
+   "dyCagr5": -6.0833,
+   "proventos": [
+    {
+     "comp": "10/2026",
+     "valor": 0.71,
+     "dataCom": "2026-10-30",
+     "pagamento": "2026-11-13"
+    },
+    {
+     "comp": "09/2026",
+     "valor": 0.6,
+     "dataCom": "2026-09-30",
+     "pagamento": "2026-10-14"
+    },
+    {
+     "comp": "08/2026",
+     "valor": 0.65,
+     "dataCom": "2026-08-31",
+     "pagamento": "2026-09-14"
+    },
+    {
+     "comp": "07/2026",
+     "valor": 0.95,
+     "dataCom": "2026-07-31",
+     "pagamento": "2026-08-13"
+    },
+    {
+     "comp": "06/2026",
+     "valor": 1.12,
+     "dataCom": "2026-06-30",
+     "pagamento": "2026-07-13"
+    },
+    {
+     "comp": "05/2026",
+     "valor": 1.25,
+     "dataCom": "2026-05-29",
+     "pagamento": "2026-06-12"
+    },
+    {
+     "comp": "04/2026",
+     "valor": 1.1,
+     "dataCom": "2026-04-30",
+     "pagamento": "2026-05-14"
+    },
+    {
+     "comp": "03/2026",
+     "valor": 1.05,
+     "dataCom": "2026-03-31",
+     "pagamento": "2026-04-14"
+    },
+    {
+     "comp": "02/2026",
+     "valor": 0.65,
+     "dataCom": "2026-02-27",
+     "pagamento": "2026-03-12"
+    },
+    {
+     "comp": "01/2026",
+     "valor": 0.7,
+     "dataCom": "2026-01-30",
+     "pagamento": "2026-02-12"
+    },
+    {
+     "comp": "12/2025",
+     "valor": 0.7,
+     "dataCom": "2025-12-30",
+     "pagamento": "2026-01-14"
+    },
+    {
+     "comp": "11/2025",
+     "valor": 0.72,
+     "dataCom": "2025-11-28",
+     "pagamento": "2025-12-11"
+    }
+   ],
+   "precoFonte": "Yahoo",
+   "vacancia": null
+  },
+  "KNRI11": {
+   "nome": "Kinea Renda Imobiliária",
+   "preco": 151.79,
+   "precoData": "2026-11-13",
+   "min52": 137.14,
+   "max52": 167.88,
+   "dy12m": 8.7687,
+   "pvp": 0.9291,
+   "vpa": 163.38,
+   "dyCagr3": 3.514,
+   "dyCagr5": 5.3842,
+   "proventos": [
+    {
+     "comp": "10/2026",
+     "valor": 1.1,
+     "dataCom": "2026-10-30",
+     "pagamento": "2026-11-16"
+    },
+    {
+     "comp": "09/2026",
+     "valor": 1.1,
+     "dataCom": "2026-09-30",
+     "pagamento": "2026-10-15"
+    },
+    {
+     "comp": "08/2026",
+     "valor": 1.1,
+     "dataCom": "2026-08-31",
+     "pagamento": "2026-09-15"
+    },
+    {
+     "comp": "07/2026",
+     "valor": 1.1,
+     "dataCom": "2026-07-31",
+     "pagamento": "2026-08-14"
+    },
+    {
+     "comp": "06/2026",
+     "valor": 1.38,
+     "dataCom": "2026-06-30",
+     "pagamento": "2026-07-14"
+    },
+    {
+     "comp": "05/2026",
+     "valor": 1.1,
+     "dataCom": "2026-05-29",
+     "pagamento": "2026-06-15"
+    },
+    {
+     "comp": "04/2026",
+     "valor": 1.1,
+     "dataCom": "2026-04-30",
+     "pagamento": "2026-05-15"
+    },
+    {
+     "comp": "03/2026",
+     "valor": 1.1,
+     "dataCom": "2026-03-31",
+     "pagamento": "2026-04-15"
+    },
+    {
+     "comp": "02/2026",
+     "valor": 1.1,
+     "dataCom": "2026-02-27",
+     "pagamento": "2026-03-13"
+    },
+    {
+     "comp": "01/2026",
+     "valor": 0.88,
+     "dataCom": "2026-01-30",
+     "pagamento": "2026-02-13"
+    },
+    {
+     "comp": "12/2025",
+     "valor": 1.25,
+     "dataCom": "2025-12-30",
+     "pagamento": "2026-01-15"
+    },
+    {
+     "comp": "11/2025",
+     "valor": 1.0,
+     "dataCom": "2025-11-28",
+     "pagamento": "2025-12-12"
+    }
+   ],
+   "precoFonte": "Yahoo",
+   "vacancia": 0.08
+  },
+  "KNSC11": {
+   "nome": "FII KINEA SC",
+   "preco": 8.57,
+   "precoData": "2026-11-13",
+   "min52": 7.78,
+   "max52": 9.22,
+   "dy12m": 13.0688,
+   "pvp": 0.9817,
+   "vpa": 8.73,
+   "dyCagr3": 3.8499,
+   "dyCagr5": -2.0624,
+   "proventos": [
+    {
+     "comp": "10/2026",
+     "valor": 0.08,
+     "dataCom": "2026-10-30",
+     "pagamento": "2026-11-13"
+    },
+    {
+     "comp": "09/2026",
+     "valor": 0.08,
+     "dataCom": "2026-09-30",
+     "pagamento": "2026-10-14"
+    },
+    {
+     "comp": "08/2026",
+     "valor": 0.09,
+     "dataCom": "2026-08-31",
+     "pagamento": "2026-09-14"
+    },
+    {
+     "comp": "07/2026",
+     "valor": 0.11,
+     "dataCom": "2026-07-31",
+     "pagamento": "2026-08-13"
+    },
+    {
+     "comp": "06/2026",
+     "valor": 0.1,
+     "dataCom": "2026-06-30",
+     "pagamento": "2026-07-13"
+    },
+    {
+     "comp": "05/2026",
+     "valor": 0.1,
+     "dataCom": "2026-05-29",
+     "pagamento": "2026-06-12"
+    },
+    {
+     "comp": "04/2026",
+     "valor": 0.1,
+     "dataCom": "2026-04-30",
+     "pagamento": "2026-05-14"
+    },
+    {
+     "comp": "03/2026",
+     "valor": 0.11,
+     "dataCom": "2026-03-31",
+     "pagamento": "2026-04-14"
+    },
+    {
+     "comp": "02/2026",
+     "valor": 0.08,
+     "dataCom": "2026-02-27",
+     "pagamento": "2026-03-12"
+    },
+    {
+     "comp": "01/2026",
+     "valor": 0.09,
+     "dataCom": "2026-01-30",
+     "pagamento": "2026-02-12"
+    },
+    {
+     "comp": "12/2025",
+     "valor": 0.09,
+     "dataCom": "2025-12-30",
+     "pagamento": "2026-01-14"
+    },
+    {
+     "comp": "11/2025",
+     "valor": 0.09,
+     "dataCom": "2025-11-28",
+     "pagamento": "2025-12-11"
+    }
+   ],
+   "precoFonte": "Yahoo",
+   "vacancia": null
+  },
+  "MXRF11": {
+   "nome": "Maxi Renda",
+   "preco": 8.75,
+   "precoData": "2026-11-13",
+   "min52": 8.39,
+   "max52": 9.92,
+   "dy12m": 13.6,
+   "pvp": 0.9449,
+   "vpa": 9.26,
+   "dyCagr3": -0.4149,
+   "dyCagr5": -0.1672,
+   "proventos": [
+    {
+     "comp": "10/2026",
+     "valor": 0.1,
+     "dataCom": "2026-10-30",
+     "pagamento": "2026-11-16"
+    },
+    {
+     "comp": "09/2026",
+     "valor": 0.1,
+     "dataCom": "2026-09-30",
+     "pagamento": "2026-10-15"
+    },
+    {
+     "comp": "08/2026",
+     "valor": 0.1,
+     "dataCom": "2026-08-31",
+     "pagamento": "2026-09-15"
+    },
+    {
+     "comp": "07/2026",
+     "valor": 0.1,
+     "dataCom": "2026-07-31",
+     "pagamento": "2026-08-14"
+    },
+    {
+     "comp": "06/2026",
+     "valor": 0.1,
+     "dataCom": "2026-06-30",
+     "pagamento": "2026-07-14"
+    },
+    {
+     "comp": "05/2026",
+     "valor": 0.1,
+     "dataCom": "2026-05-29",
+     "pagamento": "2026-06-15"
+    },
+    {
+     "comp": "04/2026",
+     "valor": 0.1,
+     "dataCom": "2026-04-30",
+     "pagamento": "2026-05-15"
+    },
+    {
+     "comp": "03/2026",
+     "valor": 0.1,
+     "dataCom": "2026-03-31",
+     "pagamento": "2026-04-15"
+    },
+    {
+     "comp": "02/2026",
+     "valor": 0.1,
+     "dataCom": "2026-02-27",
+     "pagamento": "2026-03-13"
+    },
+    {
+     "comp": "01/2026",
+     "valor": 0.1,
+     "dataCom": "2026-01-30",
+     "pagamento": "2026-02-13"
+    },
+    {
+     "comp": "12/2025",
+     "valor": 0.1,
+     "dataCom": "2025-12-30",
+     "pagamento": "2026-01-15"
+    },
+    {
+     "comp": "11/2025",
+     "valor": 0.1,
+     "dataCom": "2025-11-28",
+     "pagamento": "2025-12-12"
+    }
+   ],
+   "precoFonte": "Yahoo",
+   "vacancia": 0.0
+  },
+  "PVBI11": {
+   "nome": "FII VBI PRI",
+   "preco": 62.92,
+   "precoData": "2026-11-13",
+   "min52": 56.3,
+   "max52": 81.51,
+   "dy12m": 7.8036,
+   "pvp": 0.6019,
+   "vpa": 104.53,
+   "dyCagr3": -14.1132,
+   "dyCagr5": -4.5583,
+   "proventos": [
+    {
+     "comp": "10/2026",
+     "valor": 0.37,
+     "dataCom": "2026-10-30",
+     "pagamento": "2026-11-09"
+    },
+    {
+     "comp": "09/2026",
+     "valor": 0.37,
+     "dataCom": "2026-09-30",
+     "pagamento": "2026-10-07"
+    },
+    {
+     "comp": "08/2026",
+     "valor": 0.37,
+     "dataCom": "2026-08-31",
+     "pagamento": "2026-09-08"
+    },
+    {
+     "comp": "07/2026",
+     "valor": 0.4,
+     "dataCom": "2026-07-31",
+     "pagamento": "2026-08-07"
+    },
+    {
+     "comp": "06/2026",
+     "valor": 0.4,
+     "dataCom": "2026-06-30",
+     "pagamento": "2026-07-07"
+    },
+    {
+     "comp": "05/2026",
+     "valor": 0.4,
+     "dataCom": "2026-05-29",
+     "pagamento": "2026-06-08"
+    },
+    {
+     "comp": "04/2026",
+     "valor": 0.4,
+     "dataCom": "2026-04-30",
+     "pagamento": "2026-05-08"
+    },
+    {
+     "comp": "03/2026",
+     "valor": 0.4,
+     "dataCom": "2026-03-31",
+     "pagamento": "2026-04-08"
+    },
+    {
+     "comp": "02/2026",
+     "valor": 0.45,
+     "dataCom": "2026-02-27",
+     "pagamento": "2026-03-06"
+    },
+    {
+     "comp": "01/2026",
+     "valor": 0.45,
+     "dataCom": "2026-01-30",
+     "pagamento": "2026-02-06"
+    },
+    {
+     "comp": "12/2025",
+     "valor": 0.45,
+     "dataCom": "2025-12-30",
+     "pagamento": "2026-01-08"
+    },
+    {
+     "comp": "11/2025",
+     "valor": 0.45,
+     "dataCom": "2025-11-28",
+     "pagamento": "2025-12-05"
+    }
+   ],
+   "precoFonte": "Yahoo",
+   "vacancia": 31.94
+  },
+  "RBRR11": {
+   "nome": "RBR Rendimento High Grade",
+   "preco": 63.0,
+   "precoData": "2026-11-10",
+   "min52": 61.38,
+   "max52": 84.7,
+   "dy12m": 15.4762,
+   "pvp": 0.6855,
+   "vpa": 91.91,
+   "dyCagr3": -0.1058,
+   "dyCagr5": -4.9025,
+   "proventos": [
+    {
+     "comp": "11/2026",
+     "valor": 0.59,
+     "dataCom": "2026-11-11",
+     "pagamento": "2026-11-18"
+    },
+    {
+     "comp": "10/2026",
+     "valor": 0.73,
+     "dataCom": "2026-10-09",
+     "pagamento": "2026-10-19"
+    },
+    {
+     "comp": "09/2026",
+     "valor": 0.9,
+     "dataCom": "2026-09-10",
+     "pagamento": "2026-09-17"
+    },
+    {
+     "comp": "08/2026",
+     "valor": 0.9,
+     "dataCom": "2026-08-11",
+     "pagamento": "2026-08-18"
+    },
+    {
+     "comp": "07/2026",
+     "valor": 0.98,
+     "dataCom": "2026-07-09",
+     "pagamento": "2026-07-16"
+    },
+    {
+     "comp": "06/2026",
+     "valor": 0.95,
+     "dataCom": "2026-06-10",
+     "pagamento": "2026-06-17"
+    },
+    {
+     "comp": "05/2026",
+     "valor": 0.9,
+     "dataCom": "2026-05-12",
+     "pagamento": "2026-05-19"
+    },
+    {
+     "comp": "04/2026",
+     "valor": 0.7,
+     "dataCom": "2026-04-10",
+     "pagamento": "2026-04-17"
+    },
+    {
+     "comp": "03/2026",
+     "valor": 0.7,
+     "dataCom": "2026-03-10",
+     "pagamento": "2026-03-17"
+    },
+    {
+     "comp": "02/2026",
+     "valor": 0.8,
+     "dataCom": "2026-02-10",
+     "pagamento": "2026-02-19"
+    },
+    {
+     "comp": "01/2026",
+     "valor": 0.8,
+     "dataCom": "2026-01-12",
+     "pagamento": "2026-01-19"
+    },
+    {
+     "comp": "12/2025",
+     "valor": 0.8,
+     "dataCom": "2025-12-09",
+     "pagamento": "2025-12-16"
+    }
+   ],
+   "precoFonte": "fiis.com.br",
+   "vacancia": null
+  },
+  "RECR11": {
+   "nome": "FII REC RECE",
+   "preco": 68.7,
+   "precoData": "2026-11-13",
+   "min52": 66.96,
+   "max52": 83.71,
+   "dy12m": 15.5459,
+   "pvp": 0.7944,
+   "vpa": 86.48,
+   "dyCagr3": 0.8291,
+   "dyCagr5": -4.5596,
+   "proventos": [
+    {
+     "comp": "11/2026",
+     "valor": 0.76,
+     "dataCom": "2026-11-09",
+     "pagamento": "2026-11-16"
+    },
+    {
+     "comp": "10/2026",
+     "valor": 0.62,
+     "dataCom": "2026-10-07",
+     "pagamento": "2026-10-15"
+    },
+    {
+     "comp": "09/2026",
+     "valor": 0.74,
+     "dataCom": "2026-09-08",
+     "pagamento": "2026-09-15"
+    },
+    {
+     "comp": "08/2026",
+     "valor": 1.1,
+     "dataCom": "2026-08-07",
+     "pagamento": "2026-08-14"
+    },
+    {
+     "comp": "07/2026",
+     "valor": 1.08,
+     "dataCom": "2026-07-07",
+     "pagamento": "2026-07-14"
+    },
+    {
+     "comp": "06/2026",
+     "valor": 1.12,
+     "dataCom": "2026-06-08",
+     "pagamento": "2026-06-15"
+    },
+    {
+     "comp": "05/2026",
+     "valor": 1.05,
+     "dataCom": "2026-05-08",
+     "pagamento": "2026-05-15"
+    },
+    {
+     "comp": "04/2026",
+     "valor": 1.03,
+     "dataCom": "2026-04-08",
+     "pagamento": "2026-04-15"
+    },
+    {
+     "comp": "03/2026",
+     "valor": 0.73,
+     "dataCom": "2026-03-06",
+     "pagamento": "2026-03-13"
+    },
+    {
+     "comp": "02/2026",
+     "valor": 0.83,
+     "dataCom": "2026-02-06",
+     "pagamento": "2026-02-13"
+    },
+    {
+     "comp": "01/2026",
+     "valor": 0.81,
+     "dataCom": "2026-01-08",
+     "pagamento": "2026-01-15"
+    },
+    {
+     "comp": "12/2025",
+     "valor": 0.82,
+     "dataCom": "2025-12-05",
+     "pagamento": "2025-12-12"
+    }
+   ],
+   "precoFonte": "Yahoo",
+   "vacancia": null
+  },
+  "RZAG11": {
+   "nome": "FIAGRO RIZA",
+   "preco": 7.78,
+   "precoData": "2026-11-13",
+   "min52": 7.74,
+   "max52": 8.87,
+   "dy12m": 19.2159,
+   "pvp": 0.8181,
+   "vpa": 9.51,
+   "dyCagr3": 4.769,
+   "dyCagr5": 3.6279,
+   "proventos": [
+    {
+     "comp": "10/2026",
+     "valor": 0.13,
+     "dataCom": "2026-10-30",
+     "pagamento": "2026-11-16"
+    },
+    {
+     "comp": "09/2026",
+     "valor": 0.13,
+     "dataCom": "2026-09-30",
+     "pagamento": "2026-10-15"
+    },
+    {
+     "comp": "08/2026",
+     "valor": 0.13,
+     "dataCom": "2026-08-31",
+     "pagamento": "2026-09-15"
+    },
+    {
+     "comp": "07/2026",
+     "valor": 0.13,
+     "dataCom": "2026-07-31",
+     "pagamento": "2026-08-14"
+    },
+    {
+     "comp": "06/2026",
+     "valor": 0.12,
+     "dataCom": "2026-06-30",
+     "pagamento": "2026-07-14"
+    },
+    {
+     "comp": "05/2026",
+     "valor": 0.12,
+     "dataCom": "2026-05-29",
+     "pagamento": "2026-06-15"
+    },
+    {
+     "comp": "04/2026",
+     "valor": 0.12,
+     "dataCom": "2026-04-30",
+     "pagamento": "2026-05-15"
+    },
+    {
+     "comp": "03/2026",
+     "valor": 0.12,
+     "dataCom": "2026-03-31",
+     "pagamento": "2026-04-15"
+    },
+    {
+     "comp": "02/2026",
+     "valor": 0.12,
+     "dataCom": "2026-02-27",
+     "pagamento": "2026-03-13"
+    },
+    {
+     "comp": "01/2026",
+     "valor": 0.12,
+     "dataCom": "2026-01-30",
+     "pagamento": "2026-02-13"
+    },
+    {
+     "comp": "12/2025",
+     "valor": 0.15,
+     "dataCom": "2025-12-30",
+     "pagamento": "2026-01-15"
+    },
+    {
+     "comp": "11/2025",
+     "valor": 0.13,
+     "dataCom": "2025-11-28",
+     "pagamento": "2025-12-12"
+    }
+   ],
+   "precoFonte": "Yahoo",
+   "vacancia": null
+  },
+  "RZTR11": {
+   "nome": "FII RIZA TX",
+   "preco": 67.49,
+   "precoData": "2026-11-13",
+   "min52": 66.04,
+   "max52": 92.18,
+   "dy12m": 16.8173,
+   "pvp": 0.6914,
+   "vpa": 97.61,
+   "dyCagr3": -0.1464,
+   "dyCagr5": -5.424,
+   "proventos": [
+    {
+     "comp": "10/2026",
+     "valor": 0.85,
+     "dataCom": "2026-10-30",
+     "pagamento": "2026-11-09"
+    },
+    {
+     "comp": "09/2026",
+     "valor": 0.85,
+     "dataCom": "2026-09-30",
+     "pagamento": "2026-10-07"
+    },
+    {
+     "comp": "08/2026",
+     "valor": 0.85,
+     "dataCom": "2026-08-31",
+     "pagamento": "2026-09-08"
+    },
+    {
+     "comp": "07/2026",
+     "valor": 0.9,
+     "dataCom": "2026-07-31",
+     "pagamento": "2026-08-07"
+    },
+    {
+     "comp": "06/2026",
+     "valor": 0.9,
+     "dataCom": "2026-06-30",
+     "pagamento": "2026-07-07"
+    },
+    {
+     "comp": "05/2026",
+     "valor": 1.0,
+     "dataCom": "2026-05-29",
+     "pagamento": "2026-06-08"
+    },
+    {
+     "comp": "04/2026",
+     "valor": 1.0,
+     "dataCom": "2026-04-30",
+     "pagamento": "2026-05-08"
+    },
+    {
+     "comp": "03/2026",
+     "valor": 1.0,
+     "dataCom": "2026-03-31",
+     "pagamento": "2026-04-08"
+    },
+    {
+     "comp": "02/2026",
+     "valor": 1.0,
+     "dataCom": "2026-02-27",
+     "pagamento": "2026-03-06"
+    },
+    {
+     "comp": "01/2026",
+     "valor": 1.0,
+     "dataCom": "2026-01-30",
+     "pagamento": "2026-02-06"
+    },
+    {
+     "comp": "12/2025",
+     "valor": 1.0,
+     "dataCom": "2025-12-30",
+     "pagamento": "2026-01-08"
+    },
+    {
+     "comp": "11/2025",
+     "valor": 1.0,
+     "dataCom": "2025-11-28",
+     "pagamento": "2025-12-05"
+    }
+   ],
+   "precoFonte": "Yahoo",
+   "vacancia": 0.0
+  },
+  "SNAG11": {
+   "nome": "FIAGRO SUNO",
+   "preco": 9.77,
+   "precoData": "2026-11-13",
+   "min52": 8.95,
+   "max52": 10.65,
+   "dy12m": 17.4002,
+   "pvp": 0.9692,
+   "vpa": 10.08,
+   "dyCagr3": 8.3289,
+   "dyCagr5": 39.2373,
+   "proventos": [
+    {
+     "comp": "11/2026",
+     "valor": 0.12,
+     "dataCom": "2026-11-13",
+     "pagamento": "2026-11-25"
+    },
+    {
+     "comp": "10/2026",
+     "valor": 0.12,
+     "dataCom": "2026-10-15",
+     "pagamento": "2026-10-23"
+    },
+    {
+     "comp": "09/2026",
+     "valor": 0.12,
+     "dataCom": "2026-09-15",
+     "pagamento": "2026-09-25"
+    },
+    {
+     "comp": "08/2026",
+     "valor": 0.12,
+     "dataCom": "2026-08-14",
+     "pagamento": "2026-08-25"
+    },
+    {
+     "comp": "07/2026",
+     "valor": 0.12,
+     "dataCom": "2026-07-15",
+     "pagamento": "2026-07-24"
+    },
+    {
+     "comp": "06/2026",
+     "valor": 0.12,
+     "dataCom": "2026-06-15",
+     "pagamento": "2026-06-25"
+    },
+    {
+     "comp": "05/2026",
+     "valor": 0.12,
+     "dataCom": "2026-05-15",
+     "pagamento": "2026-05-25"
+    },
+    {
+     "comp": "04/2026",
+     "valor": 0.12,
+     "dataCom": "2026-04-15",
+     "pagamento": "2026-04-24"
+    },
+    {
+     "comp": "03/2026",
+     "valor": 0.15,
+     "dataCom": "2026-03-13",
+     "pagamento": "2026-03-25"
+    },
+    {
+     "comp": "02/2026",
+     "valor": 0.2,
+     "dataCom": "2026-02-13",
+     "pagamento": "2026-02-25"
+    },
+    {
+     "comp": "01/2026",
+     "valor": 0.13,
+     "dataCom": "2026-01-15",
+     "pagamento": "2026-01-23"
+    },
+    {
+     "comp": "12/2025",
+     "valor": 0.13,
+     "dataCom": "2025-12-15",
+     "pagamento": "2025-12-23"
+    }
+   ],
+   "precoFonte": "Yahoo",
+   "vacancia": 0.0
+  },
+  "TRBL11": {
+   "nome": "FII SDI LOG",
+   "preco": 43.44,
+   "precoData": "2026-11-13",
+   "min52": 43.0,
+   "max52": 75.45,
+   "dy12m": 21.9153,
+   "pvp": 0.5665,
+   "vpa": 76.68,
+   "dyCagr3": -0.6565,
+   "dyCagr5": 0.73,
+   "proventos": [
+    {
+     "comp": "10/2026",
+     "valor": 0.44,
+     "dataCom": "2026-10-30",
+     "pagamento": "2026-11-16"
+    },
+    {
+     "comp": "09/2026",
+     "valor": 0.44,
+     "dataCom": "2026-09-30",
+     "pagamento": "2026-10-15"
+    },
+    {
+     "comp": "08/2026",
+     "valor": 0.44,
+     "dataCom": "2026-08-31",
+     "pagamento": "2026-09-15"
+    },
+    {
+     "comp": "07/2026",
+     "valor": 0.44,
+     "dataCom": "2026-07-31",
+     "pagamento": "2026-08-14"
+    },
+    {
+     "comp": "06/2026",
+     "valor": 2.68,
+     "dataCom": "2026-06-30",
+     "pagamento": "2026-07-15"
+    },
+    {
+     "comp": "05/2026",
+     "valor": 0.85,
+     "dataCom": "2026-05-29",
+     "pagamento": "2026-06-15"
+    },
+    {
+     "comp": "04/2026",
+     "valor": 0.85,
+     "dataCom": "2026-04-30",
+     "pagamento": "2026-05-15"
+    },
+    {
+     "comp": "03/2026",
+     "valor": 0.85,
+     "dataCom": "2026-03-31",
+     "pagamento": "2026-04-15"
+    },
+    {
+     "comp": "02/2026",
+     "valor": 0.7,
+     "dataCom": "2026-02-27",
+     "pagamento": "2026-03-13"
+    },
+    {
+     "comp": "01/2026",
+     "valor": 0.7,
+     "dataCom": "2026-01-30",
+     "pagamento": "2026-02-13"
+    },
+    {
+     "comp": "12/2025",
+     "valor": 0.53,
+     "dataCom": "2025-12-30",
+     "pagamento": "2026-01-14"
+    },
+    {
+     "comp": "11/2025",
+     "valor": 0.6,
+     "dataCom": "2025-11-28",
+     "pagamento": "2025-12-12"
+    }
+   ],
+   "precoFonte": "Yahoo",
+   "vacancia": 0.0
+  },
+  "VGHF11": {
+   "nome": "FII VALOR HE",
+   "preco": 4.01,
+   "precoData": "2026-11-13",
+   "min52": 3.88,
+   "max52": 6.83,
+   "dy12m": 19.7007,
+   "pvp": 0.4878,
+   "vpa": 8.22,
+   "dyCagr3": -10.7172,
+   "dyCagr5": -13.2718,
+   "proventos": [
+    {
+     "comp": "10/2026",
+     "valor": 0.05,
+     "dataCom": "2026-10-30",
+     "pagamento": "2026-11-09"
+    },
+    {
+     "comp": "09/2026",
+     "valor": 0.06,
+     "dataCom": "2026-09-30",
+     "pagamento": "2026-10-07"
+    },
+    {
+     "comp": "08/2026",
+     "valor": 0.06,
+     "dataCom": "2026-08-31",
+     "pagamento": "2026-09-08"
+    },
+    {
+     "comp": "07/2026",
+     "valor": 0.06,
+     "dataCom": "2026-07-31",
+     "pagamento": "2026-08-07"
+    },
+    {
+     "comp": "06/2026",
+     "valor": 0.07,
+     "dataCom": "2026-06-30",
+     "pagamento": "2026-07-07"
+    },
+    {
+     "comp": "05/2026",
+     "valor": 0.07,
+     "dataCom": "2026-05-29",
+     "pagamento": "2026-06-08"
+    },
+    {
+     "comp": "04/2026",
+     "valor": 0.07,
+     "dataCom": "2026-04-30",
+     "pagamento": "2026-05-08"
+    },
+    {
+     "comp": "03/2026",
+     "valor": 0.07,
+     "dataCom": "2026-03-31",
+     "pagamento": "2026-04-08"
+    },
+    {
+     "comp": "02/2026",
+     "valor": 0.07,
+     "dataCom": "2026-02-27",
+     "pagamento": "2026-03-06"
+    },
+    {
+     "comp": "01/2026",
+     "valor": 0.07,
+     "dataCom": "2026-01-30",
+     "pagamento": "2026-02-06"
+    },
+    {
+     "comp": "12/2025",
+     "valor": 0.07,
+     "dataCom": "2025-12-30",
+     "pagamento": "2026-01-08"
+    },
+    {
+     "comp": "11/2025",
+     "valor": 0.07,
+     "dataCom": "2025-11-28",
+     "pagamento": "2025-12-05"
+    }
+   ],
+   "precoFonte": "Yahoo",
+   "vacancia": null
+  },
+  "VGIA11": {
+   "nome": "FIAGRO VGIA",
+   "preco": 8.31,
+   "precoData": "2026-11-13",
+   "min52": 7.38,
+   "max52": 9.83,
+   "dy12m": 19.1336,
+   "pvp": 0.862,
+   "vpa": 9.64,
+   "dyCagr3": 6.3516,
+   "dyCagr5": 2.7203,
+   "proventos": [
+    {
+     "comp": "11/2026",
+     "valor": 0.12,
+     "dataCom": "2026-11-12",
+     "pagamento": "2026-11-19"
+    },
+    {
+     "comp": "10/2026",
+     "valor": 0.12,
+     "dataCom": "2026-10-13",
+     "pagamento": "2026-10-20"
+    },
+    {
+     "comp": "09/2026",
+     "valor": 0.12,
+     "dataCom": "2026-09-11",
+     "pagamento": "2026-09-18"
+    },
+    {
+     "comp": "08/2026",
+     "valor": 0.13,
+     "dataCom": "2026-08-12",
+     "pagamento": "2026-08-19"
+    },
+    {
+     "comp": "07/2026",
+     "valor": 0.13,
+     "dataCom": "2026-07-10",
+     "pagamento": "2026-07-17"
+    },
+    {
+     "comp": "06/2026",
+     "valor": 0.13,
+     "dataCom": "2026-06-11",
+     "pagamento": "2026-06-18"
+    },
+    {
+     "comp": "05/2026",
+     "valor": 0.13,
+     "dataCom": "2026-05-13",
+     "pagamento": "2026-05-20"
+    },
+    {
+     "comp": "04/2026",
+     "valor": 0.14,
+     "dataCom": "2026-04-13",
+     "pagamento": "2026-04-20"
+    },
+    {
+     "comp": "03/2026",
+     "valor": 0.15,
+     "dataCom": "2026-03-11",
+     "pagamento": "2026-03-18"
+    },
+    {
+     "comp": "02/2026",
+     "valor": 0.15,
+     "dataCom": "2026-02-11",
+     "pagamento": "2026-02-20"
+    },
+    {
+     "comp": "01/2026",
+     "valor": 0.14,
+     "dataCom": "2026-01-13",
+     "pagamento": "2026-01-20"
+    },
+    {
+     "comp": "12/2025",
+     "valor": 0.14,
+     "dataCom": "2025-12-10",
+     "pagamento": "2025-12-17"
+    }
+   ],
+   "precoFonte": "Yahoo",
+   "vacancia": null
+  },
+  "VISC11": {
+   "nome": "Vinci Shopping Centers",
+   "preco": 98.6,
+   "precoData": "2026-11-13",
+   "min52": 95.81,
+   "max52": 114.2,
+   "dy12m": 10.1623,
+   "pvp": 0.8529,
+   "vpa": 115.6,
+   "dyCagr3": -3.4414,
+   "dyCagr5": 3.3938,
+   "proventos": [
+    {
+     "comp": "10/2026",
+     "valor": 0.84,
+     "dataCom": "2026-10-30",
+     "pagamento": "2026-11-16"
+    },
+    {
+     "comp": "09/2026",
+     "valor": 0.84,
+     "dataCom": "2026-09-30",
+     "pagamento": "2026-10-15"
+    },
+    {
+     "comp": "08/2026",
+     "valor": 0.84,
+     "dataCom": "2026-08-31",
+     "pagamento": "2026-09-15"
+    },
+    {
+     "comp": "07/2026",
+     "valor": 0.84,
+     "dataCom": "2026-07-31",
+     "pagamento": "2026-08-14"
+    },
+    {
+     "comp": "06/2026",
+     "valor": 0.84,
+     "dataCom": "2026-06-30",
+     "pagamento": "2026-07-14"
+    },
+    {
+     "comp": "05/2026",
+     "valor": 0.84,
+     "dataCom": "2026-05-29",
+     "pagamento": "2026-06-15"
+    },
+    {
+     "comp": "04/2026",
+     "valor": 0.84,
+     "dataCom": "2026-04-30",
+     "pagamento": "2026-05-15"
+    },
+    {
+     "comp": "03/2026",
+     "valor": 0.84,
+     "dataCom": "2026-03-31",
+     "pagamento": "2026-04-15"
+    },
+    {
+     "comp": "02/2026",
+     "valor": 0.84,
+     "dataCom": "2026-02-27",
+     "pagamento": "2026-03-13"
+    },
+    {
+     "comp": "01/2026",
+     "valor": 0.84,
+     "dataCom": "2026-01-30",
+     "pagamento": "2026-02-13"
+    },
+    {
+     "comp": "12/2025",
+     "valor": 0.81,
+     "dataCom": "2025-12-30",
+     "pagamento": "2026-01-15"
+    },
+    {
+     "comp": "11/2025",
+     "valor": 0.81,
+     "dataCom": "2025-11-28",
+     "pagamento": "2025-12-12"
+    }
+   ],
+   "precoFonte": "Yahoo",
+   "vacancia": 5.78
+  },
+  "XPCA11": {
+   "nome": "FIAGRO XP CA",
+   "preco": 6.79,
+   "precoData": "2026-11-13",
+   "min52": 6.73,
+   "max52": 8.25,
+   "dy12m": 18.5567,
+   "pvp": 0.7058,
+   "vpa": 9.62,
+   "dyCagr3": 2.6475,
+   "dyCagr5": -1.0755,
+   "proventos": [
+    {
+     "comp": "10/2026",
+     "valor": 0.09,
+     "dataCom": "2026-10-30",
+     "pagamento": "2026-11-16"
+    },
+    {
+     "comp": "09/2026",
+     "valor": 0.1,
+     "dataCom": "2026-09-30",
+     "pagamento": "2026-10-15"
+    },
+    {
+     "comp": "08/2026",
+     "valor": 0.1,
+     "dataCom": "2026-08-31",
+     "pagamento": "2026-09-15"
+    },
+    {
+     "comp": "07/2026",
+     "valor": 0.1,
+     "dataCom": "2026-07-31",
+     "pagamento": "2026-08-14"
+    },
+    {
+     "comp": "06/2026",
+     "valor": 0.1,
+     "dataCom": "2026-06-30",
+     "pagamento": "2026-07-14"
+    },
+    {
+     "comp": "05/2026",
+     "valor": 0.1,
+     "dataCom": "2026-05-29",
+     "pagamento": "2026-06-15"
+    },
+    {
+     "comp": "04/2026",
+     "valor": 0.1,
+     "dataCom": "2026-04-30",
+     "pagamento": "2026-05-15"
+    },
+    {
+     "comp": "03/2026",
+     "valor": 0.11,
+     "dataCom": "2026-03-31",
+     "pagamento": "2026-04-15"
+    },
+    {
+     "comp": "02/2026",
+     "valor": 0.12,
+     "dataCom": "2026-02-27",
+     "pagamento": "2026-03-13"
+    },
+    {
+     "comp": "01/2026",
+     "valor": 0.12,
+     "dataCom": "2026-01-30",
+     "pagamento": "2026-02-13"
+    },
+    {
+     "comp": "12/2025",
+     "valor": 0.11,
+     "dataCom": "2025-12-30",
+     "pagamento": "2026-01-15"
+    },
+    {
+     "comp": "11/2025",
+     "valor": 0.11,
+     "dataCom": "2025-11-28",
+     "pagamento": "2025-12-12"
+    }
+   ],
+   "precoFonte": "Yahoo",
+   "vacancia": null
+  },
+  "XPLG11": {
+   "nome": "XP Log",
+   "preco": 90.9,
+   "precoData": "2026-11-13",
+   "min52": 87.49,
+   "max52": 102.25,
+   "dy12m": 10.8251,
+   "pvp": 0.8655,
+   "vpa": 105.03,
+   "dyCagr3": 1.681,
+   "dyCagr5": 3.7137,
+   "proventos": [
+    {
+     "comp": "10/2026",
+     "valor": 0.82,
+     "dataCom": "2026-10-30",
+     "pagamento": "2026-11-16"
+    },
+    {
+     "comp": "09/2026",
+     "valor": 0.82,
+     "dataCom": "2026-09-30",
+     "pagamento": "2026-10-15"
+    },
+    {
+     "comp": "08/2026",
+     "valor": 0.82,
+     "dataCom": "2026-08-31",
+     "pagamento": "2026-09-15"
+    },
+    {
+     "comp": "07/2026",
+     "valor": 0.82,
+     "dataCom": "2026-07-31",
+     "pagamento": "2026-08-14"
+    },
+    {
+     "comp": "06/2026",
+     "valor": 0.82,
+     "dataCom": "2026-06-30",
+     "pagamento": "2026-07-14"
+    },
+    {
+     "comp": "05/2026",
+     "valor": 0.82,
+     "dataCom": "2026-05-29",
+     "pagamento": "2026-06-15"
+    },
+    {
+     "comp": "04/2026",
+     "valor": 0.82,
+     "dataCom": "2026-04-30",
+     "pagamento": "2026-05-15"
+    },
+    {
+     "comp": "03/2026",
+     "valor": 0.82,
+     "dataCom": "2026-03-31",
+     "pagamento": "2026-04-15"
+    },
+    {
+     "comp": "02/2026",
+     "valor": 0.82,
+     "dataCom": "2026-02-27",
+     "pagamento": "2026-03-13"
+    },
+    {
+     "comp": "01/2026",
+     "valor": 0.82,
+     "dataCom": "2026-01-30",
+     "pagamento": "2026-02-13"
+    },
+    {
+     "comp": "12/2025",
+     "valor": 0.82,
+     "dataCom": "2025-12-30",
+     "pagamento": "2026-01-15"
+    },
+    {
+     "comp": "11/2025",
+     "valor": 0.82,
+     "dataCom": "2025-11-28",
+     "pagamento": "2025-12-12"
+    }
+   ],
+   "precoFonte": "Yahoo",
+   "vacancia": 16.5
+  },
+  "XPML11": {
+   "nome": "XP Malls",
+   "preco": 92.0,
+   "precoData": "2026-11-13",
+   "min52": 89.51,
+   "max52": 111.25,
+   "dy12m": 12.0,
+   "pvp": 0.8355,
+   "vpa": 110.11,
+   "dyCagr3": 0.4263,
+   "dyCagr5": 6.5739,
+   "proventos": [
+    {
+     "comp": "10/2026",
+     "valor": 0.92,
+     "dataCom": "2026-10-16",
+     "pagamento": "2026-10-23"
+    },
+    {
+     "comp": "09/2026",
+     "valor": 0.92,
+     "dataCom": "2026-09-18",
+     "pagamento": "2026-09-25"
+    },
+    {
+     "comp": "08/2026",
+     "valor": 0.92,
+     "dataCom": "2026-08-18",
+     "pagamento": "2026-08-25"
+    },
+    {
+     "comp": "07/2026",
+     "valor": 0.92,
+     "dataCom": "2026-07-17",
+     "pagamento": "2026-07-24"
+    },
+    {
+     "comp": "06/2026",
+     "valor": 0.92,
+     "dataCom": "2026-06-18",
+     "pagamento": "2026-06-25"
+    },
+    {
+     "comp": "05/2026",
+     "valor": 0.92,
+     "dataCom": "2026-05-18",
+     "pagamento": "2026-05-25"
+    },
+    {
+     "comp": "04/2026",
+     "valor": 0.92,
+     "dataCom": "2026-04-16",
+     "pagamento": "2026-04-24"
+    },
+    {
+     "comp": "03/2026",
+     "valor": 0.92,
+     "dataCom": "2026-03-18",
+     "pagamento": "2026-03-25"
+    },
+    {
+     "comp": "02/2026",
+     "valor": 0.92,
+     "dataCom": "2026-02-18",
+     "pagamento": "2026-02-25"
+    },
+    {
+     "comp": "01/2026",
+     "valor": 0.92,
+     "dataCom": "2026-01-16",
+     "pagamento": "2026-01-23"
+    },
+    {
+     "comp": "12/2025",
+     "valor": 0.92,
+     "dataCom": "2025-12-16",
+     "pagamento": "2025-12-23"
+    },
+    {
+     "comp": "11/2025",
+     "valor": 0.92,
+     "dataCom": "2025-11-17",
+     "pagamento": "2025-11-25"
+    }
+   ],
+   "precoFonte": "Yahoo",
+   "vacancia": null
+  }
+ },
+ "falhas": []
+}
