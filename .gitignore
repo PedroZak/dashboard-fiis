@@ -10,3 +10,8 @@ senha*.txt
 .claude/
 __pycache__/
 *.pyc
+
+# Dados de mercado ficam no ramo 'dados' (gerados pelo GitHub Actions)
+dados/
+dados_atual/
+_site/

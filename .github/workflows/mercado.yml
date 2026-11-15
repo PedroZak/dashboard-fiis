@@ -1,5 +1,7 @@
-name: Atualizar dados de mercado
+name: Atualizar dados de mercado e publicar
 
+# Os dados ficam no ramo "dados", que é SUBSTITUÍDO a cada coleta (um único commit, sem
+# histórico acumulado). O site publicado = arquivos do app (ramo main) + pasta dados/.
 on:
   schedule:
     # Dias úteis: 13h e 18h40 (horário de Brasília = UTC-3). O GitHub pode atrasar alguns minutos.
@@ -7,39 +9,81 @@ on:
     - cron: "40 21 * * 1-5"
   workflow_dispatch:
   push:
-    paths:
-      - tickers.json
-      - coletor/**
+    branches: [main]
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 concurrency:
-  group: mercado
+  group: mercado-e-site
   cancel-in-progress: false
 
 jobs:
-  coletar:
+  publicar:
     runs-on: ubuntu-latest
+    timeout-minutes: 40
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Baixar os dados publicados atualmente
+        run: |
+          git clone --depth 1 --branch dados "https://github.com/${{ github.repository }}.git" dados_atual \
+            || mkdir -p dados_atual
+          rm -rf dados_atual/.git
+
+      - name: Decidir se precisa coletar
+        id: decidir
+        run: |
+          coletar=true
+          if [ "${{ github.event_name }}" = "push" ] && [ -f dados_atual/indice.json ]; then
+            # Em push só coleta de novo se o coletor ou a lista de fundos mudou.
+            if ! git diff --name-only HEAD~1 HEAD | grep -qE '^(coletor/|tickers\.json)'; then
+              coletar=false
+            fi
+          fi
+          echo "coletar=$coletar" >> "$GITHUB_OUTPUT"
+          echo "Coletar: $coletar"
 
       - uses: actions/setup-python@v5
+        if: steps.decidir.outputs.coletar == 'true'
         with:
           python-version: "3.12"
 
-      - run: pip install requests
-
-      - run: python coletor/coletar_mercado.py
-
-      - name: Publicar se mudou
+      - name: Coletar
+        if: steps.decidir.outputs.coletar == 'true'
         run: |
+          pip install requests
+          python coletor/coletar_mercado.py --saida dados_atual
+
+      - name: Publicar ramo "dados" (substitui o anterior)
+        if: steps.decidir.outputs.coletar == 'true'
+        run: |
+          cd dados_atual
+          git init -q -b dados
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add mercado.json historico_mercado.json
-          if git diff --cached --quiet; then
-            echo "Nada mudou."
-          else
-            git commit -m "Dados de mercado $(TZ=America/Sao_Paulo date '+%d/%m/%Y %H:%M')"
-            git push
-          fi
+          git add -A
+          git commit -q -m "Dados de mercado $(TZ=America/Sao_Paulo date '+%d/%m/%Y %H:%M')"
+          git push -q --force "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" dados
+          rm -rf .git
+
+      - name: Montar o site
+        run: |
+          mkdir -p _site/dados
+          cp index.html manifest.json icon-*.png _site/
+          cp -r dados_atual/. _site/dados/
+          echo "Arquivos no site: $(find _site -type f | wc -l)"
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deploy
+        uses: actions/deploy-pages@v4

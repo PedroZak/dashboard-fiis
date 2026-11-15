@@ -411,7 +411,7 @@
 
 <footer>
   Sua carteira (cotas, preço médio e histórico de proventos) fica <b>só neste aparelho</b> — nada é enviado para lugar nenhum.
-  Este app baixa apenas dados públicos de mercado (<code>mercado.json</code>), atualizados automaticamente em dias úteis.
+  Este app baixa apenas dados públicos de mercado dos fundos da sua carteira, atualizados automaticamente em dias úteis.
   Use o menu <b>☰</b> para registrar compras e vendas e para salvar um backup.
 </footer>
 
@@ -423,6 +423,8 @@
     <p class="setup-note">Para começar, importe o arquivo da sua carteira (<code>carteira.json</code>).
       Ele fica guardado só neste aparelho — o app não envia seus dados para nenhum servidor.</p>
     <button class="btn" type="button" id="setup-importar">Importar carteira</button>
+    <button class="btn sec" type="button" id="setup-zero">Começar do zero</button>
+    <p class="setup-note" style="font-size:12px">Sem arquivo? Comece do zero e cadastre seus fundos pelo menu, com a quantidade de cotas e o preço médio.</p>
     <div class="msg" id="setup-msg"></div>
   </div>
 </div>
@@ -479,7 +481,8 @@
 </dialog>
 
 <script>
-const K_CART = 'fii-carteira', K_MERC = 'fii-mercado';
+const K_CART = 'fii-carteira', K_MERC = 'fii-mercado2';
+try { localStorage.removeItem('fii-mercado'); } catch {}   // cache do formato antigo
 let DATA = null, CART = null, MERC = null;
 let hideValues = localStorage.getItem('fii-hide-values') === '1';
 
@@ -524,19 +527,38 @@ function normalizarCarteira(obj){
   return c;
 }
 
-/* ====================== Dados de mercado ====================== */
-async function carregarMercado(){
+/* ====================== Dados de mercado ======================
+   dados/indice.json      -> data da coleta e lista de fundos disponíveis
+   dados/ativos/XXXX.json -> um arquivo por fundo; o app baixa só os da carteira */
+let INDICE = null;
+async function baixarJSON(url){
+  const r = await fetch(url + '?t=' + Date.now(), {cache:'no-store'});
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  return r.json();
+}
+async function carregarMercado(tickers){
+  let cache = null;
+  try { cache = JSON.parse(localStorage.getItem(K_MERC)); } catch {}
   try {
-    const r = await fetch('mercado.json?t=' + Date.now(), {cache:'no-store'});
-    if (!r.ok) throw new Error('HTTP ' + r.status);
-    const txt = await r.text();
-    const m = JSON.parse(txt);
-    try { localStorage.setItem(K_MERC, txt); } catch {}
+    const indice = await baixarJSON('dados/indice.json');
+    const ativos = {};
+    await Promise.all(tickers.filter(t => t in indice.ativos).map(async t => {
+      try { ativos[t] = await baixarJSON(`dados/ativos/${t}.json`); }
+      catch { if (cache && cache.ativos && cache.ativos[t]) ativos[t] = cache.ativos[t]; }
+    }));
+    INDICE = indice;
+    const m = {geradoEm: indice.geradoEm, ativos};
+    try { localStorage.setItem(K_MERC, JSON.stringify({...m, indice})); } catch {}
     return {m, offline:false};
   } catch (e) {
-    try { const m = JSON.parse(localStorage.getItem(K_MERC)); if (m) return {m, offline:true}; } catch {}
+    if (cache) { INDICE = cache.indice || null; return {m:{geradoEm:cache.geradoEm, ativos:cache.ativos || {}}, offline:true}; }
     return {m:null, offline:true};
   }
+}
+/** Baixa os dados de um fundo que acabou de entrar na carteira (ou que está sendo digitado no formulário). */
+async function garantirAtivoNoMercado(t){
+  if (!MERC || MERC.ativos[t] || !INDICE || !(t in INDICE.ativos)) return false;
+  try { MERC.ativos[t] = await baixarJSON(`dados/ativos/${t}.json`); return true; } catch { return false; }
 }
 
 /* ====================== Proventos ====================== */
@@ -1062,11 +1084,13 @@ async function iniciar(){
   if (!CART) { document.getElementById('setup').hidden = false; return; }
   document.getElementById('setup').hidden = true;
 
-  const {m, offline} = await carregarMercado();
+  const {m, offline} = await carregarMercado(Object.keys(CART.ativos));
   MERC = m;
   mostrarStatus(MERC, offline);
 
   const avisos = [];
+  if (!Object.keys(CART.ativos).length)
+    avisos.push('<b>Carteira vazia.</b> Toque no menu ☰ → <b>Registrar compra ou venda</b> para adicionar seus fundos.');
   if (MERC) {
     const novos = lancarProventos(CART, MERC);
     salvarCarteira(CART);
@@ -1079,7 +1103,7 @@ async function iniciar(){
   }
   DATA = calcular(CART, MERC);
   if (DATA.semMercado.length)
-    avisos.push(`Sem dados de mercado para ${DATA.semMercado.map(esc).join(', ')} — usando o preço médio. Para incluir, acrescente o ticker no <code>tickers.json</code> do repositório.`);
+    avisos.push(`Sem dados de mercado para ${DATA.semMercado.map(esc).join(', ')} — usando o preço médio. Ele não está entre os fundos acompanhados (os ~190 mais negociados); para incluir, acrescente em <code>extras</code> no <code>tickers.json</code> do repositório.`);
   mostrarAviso(avisos);
   render(DATA);
   preencherListaTickers();
@@ -1096,6 +1120,10 @@ function recalcular(){
 const arquivo = document.getElementById('arquivo');
 function pedirArquivo(){ arquivo.value = ''; arquivo.click(); }
 document.getElementById('setup-importar').addEventListener('click', pedirArquivo);
+document.getElementById('setup-zero').addEventListener('click', async () => {
+  salvarCarteira(normalizarCarteira({versao:1, ativos:{}, proventos:{lancamentos:[]}}));
+  await iniciar();
+});
 arquivo.addEventListener('change', async () => {
   const f = arquivo.files[0]; if (!f) return;
   const msgEl = document.getElementById('setup-msg');
@@ -1145,9 +1173,16 @@ const fC = document.getElementById('f-classe'), fS = document.getElementById('f-
 const tipoSel = () => movForm.querySelector('input[name=tipo]:checked').value;
 
 function preencherListaTickers(){
-  const set = new Set([...Object.keys(CART ? CART.ativos : {}), ...Object.keys((MERC && MERC.ativos) || {})]);
-  document.getElementById('lista-tickers').innerHTML = [...set].sort().map(t => `<option value="${esc(t)}">`).join('');
+  const nomes = (INDICE && INDICE.ativos) || {};
+  const set = new Set([...Object.keys(CART ? CART.ativos : {}), ...Object.keys(nomes)]);
+  document.getElementById('lista-tickers').innerHTML = [...set].sort()
+    .map(t => `<option value="${esc(t)}">${esc(nomes[t] || '')}</option>`).join('');
 }
+let _tk;
+fT.addEventListener('input', () => {
+  clearTimeout(_tk);
+  _tk = setTimeout(async () => { if (await garantirAtivoNoMercado(fT.value.trim().toUpperCase())) atualizarPrevia(); }, 300);
+});
 
 function atualizarPrevia(){
   const t = fT.value.trim().toUpperCase();
@@ -1179,7 +1214,7 @@ document.getElementById('m-mov').addEventListener('click', () => {
 });
 document.getElementById('mov-cancelar').addEventListener('click', () => mov.close());
 
-movForm.addEventListener('submit', ev => {
+movForm.addEventListener('submit', async ev => {
   ev.preventDefault();
   const msgEl = document.getElementById('mov-msg');
   const t = fT.value.trim().toUpperCase(), qtd = Math.round(+fQ.value), preco = +fP.value, data = fD.value, tipo = tipoSel();
@@ -1205,6 +1240,7 @@ movForm.addEventListener('submit', ev => {
   h.movimentos = h.movimentos || [];
   h.movimentos.push({data, tipo, qtd, preco});
   mov.close();
+  await garantirAtivoNoMercado(t);
   recalcular();
   if (MERC) { const novos = lancarProventos(CART, MERC); if (novos.length) recalcular(); }
   mostrarAviso([`${tipo === 'compra' ? 'Compra' : 'Venda'} registrada: ${qtd} ${esc(t)} a R$ ${fmt(preco)}. Lembre de salvar um backup pelo menu.`]);
