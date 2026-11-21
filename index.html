@@ -307,6 +307,18 @@
   </div>
 </section>
 
+<section>
+  <div class="section-title">Histórico de operações</div>
+  <div class="section-note">Compras e vendas das notas da corretora + o que você registra no app. Só para consulta — não altera cotas nem preço médio</div>
+  <div class="chips" id="ops-filtro" style="flex-wrap:wrap;margin-bottom:10px"></div>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>Data</th><th>Ativo</th><th>Operação</th><th>Qtd.</th><th>Preço</th><th>Total</th></tr></thead>
+    <tbody id="ops-body"></tbody>
+  </table>
+  </div>
+</section>
+
 </div>
 
 <div class="tab-content" id="tab-proventos" style="display:none">
@@ -873,6 +885,7 @@ function render(data){
     </tr>`).join('');
 
   document.getElementById('sub-updated').textContent = `${data.positions.length} ativos · carteira guardada neste aparelho`;
+  renderOperacoes();
   renderEvolucao();
   renderDesempenho();
 }
@@ -1138,6 +1151,50 @@ document.getElementById('evo-faixa').addEventListener('click', e => {
 });
 let _rz; addEventListener('resize', () => { clearTimeout(_rz); _rz = setTimeout(() => { renderEvolucao(); renderDesempenho(); }, 150); });
 
+/* ====================== Histórico de operações ====================== */
+let opsFiltro = '';
+function todasOperacoes(){
+  const ops = (CART.historicoMovimentos || []).map(m => ({...m}));
+  for (const [t, h] of Object.entries(CART.ativos))
+    (h.movimentos || []).forEach(m => ops.push({data:m.data, tipo:m.tipo, t, qtd:m.qtd, preco:m.preco}));
+  const vistos = new Set();
+  return ops.filter(o => { const k = [o.data, o.t, o.tipo, o.qtd, o.preco].join('|'); if (vistos.has(k)) return false; vistos.add(k); return true; })
+            .sort((a, b) => b.data.localeCompare(a.data) || a.t.localeCompare(b.t));
+}
+function renderOperacoes(){
+  const todas = todasOperacoes();
+  const tickers = [...new Set(todas.map(o => o.t))].sort();
+  if (opsFiltro && !tickers.includes(opsFiltro)) opsFiltro = '';
+  document.getElementById('ops-filtro').innerHTML = todas.length ? ['', ...tickers].map(t =>
+    `<button class="chip${t === opsFiltro ? ' on' : ''}" data-t="${esc(t)}">${t ? esc(t) : 'Todos'}</button>`).join('') : '';
+  const ops = todas.filter(o => !opsFiltro || o.t === opsFiltro);
+  const body = document.getElementById('ops-body');
+  if (!ops.length) {
+    body.innerHTML = `<tr><td colspan="6" class="dim">Nenhuma operação registrada. Use ☰ → Registrar compra ou venda, ou importe um histórico de operações.</td></tr>`;
+    return;
+  }
+  // Linhas agrupadas por ano, com o total líquido aportado (compras − vendas) no ano.
+  let html = '', anoAtual = null;
+  const totalAno = a => ops.filter(o => o.data.startsWith(a)).reduce((s, o) => s + (o.tipo === 'venda' ? -1 : 1) * o.qtd * o.preco, 0);
+  for (const o of ops) {
+    const ano = o.data.slice(0, 4);
+    if (ano !== anoAtual) {
+      anoAtual = ano;
+      html += `<tr><td colspan="5" style="background:var(--surface-2);font-family:'Space Grotesk',sans-serif;font-weight:600">${ano}</td>
+               <td style="background:var(--surface-2)" class="dim">${fmtR(r2(totalAno(ano)))}</td></tr>`;
+    }
+    const venda = o.tipo === 'venda';
+    html += `<tr><td>${dataBR(o.data)}</td><td class="ticker-cell">${esc(o.t)}${o.obs ? `<span class="seg-tag">${esc(o.obs)}</span>` : ''}</td>
+      <td class="${venda ? 'neg' : 'pos'}" style="text-align:right">${venda ? 'Venda' : 'Compra'}</td><td>${fmtNum(o.qtd)}</td>
+      <td>${fmtR(o.preco)}</td><td>${fmtR(r2((venda ? -1 : 1) * o.qtd * o.preco))}</td></tr>`;
+  }
+  body.innerHTML = html;
+}
+document.getElementById('ops-filtro').addEventListener('click', e => {
+  const b = e.target.closest('.chip'); if (!b) return;
+  opsFiltro = b.dataset.t; renderOperacoes();
+});
+
 /* ====================== Desempenho (a partir do início do acompanhamento) ====================== */
 let desDias = 0, desAtivo = null;
 const dataCurta = iso => iso.slice(8,10) + '/' + iso.slice(5,7);
@@ -1382,7 +1439,22 @@ arquivo.addEventListener('change', async () => {
   const f = arquivo.files[0]; if (!f) return;
   const msgEl = document.getElementById('setup-msg');
   try {
-    const c = normalizarCarteira(JSON.parse(await f.text()));
+    const obj = JSON.parse(await f.text());
+    // Arquivo só com histórico de operações: MESCLA na carteira atual (não substitui nada).
+    if (obj && obj.tipo === 'historico-movimentos') {
+      if (!CART) throw new Error('Importe ou crie a carteira primeiro; depois importe o histórico de operações.');
+      const chave = m => [m.data, m.t, m.tipo, m.qtd, m.preco].join('|');
+      const atuais = CART.historicoMovimentos || [];
+      const vistos = new Set(atuais.map(chave));
+      const novos = (obj.movimentos || []).filter(m => m.data && m.t && m.qtd > 0 && !vistos.has(chave(m)));
+      CART.historicoMovimentos = [...atuais, ...novos].sort((a, b) => a.data.localeCompare(b.data));
+      salvarCarteira(CART);
+      document.getElementById('menu').close();
+      recalcular();
+      mostrarAviso([`<b>${novos.length} operação(ões) adicionada(s)</b> ao histórico${novos.length < (obj.movimentos || []).length ? ' (as repetidas foram ignoradas)' : ''}. Veja em Posições → Histórico de operações.`]);
+      return;
+    }
+    const c = normalizarCarteira(obj);
     if (lerCarteira() && !confirm(`Substituir a carteira deste aparelho pelo arquivo "${f.name}"?`)) return;
     salvarCarteira(c);
     document.getElementById('menu').close();
