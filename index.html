@@ -172,6 +172,13 @@
   .meta-grid .label{ font-size:11.5px; color:var(--text-dim); margin-bottom:4px; }
   .meta-grid .value{ font-family:'IBM Plex Mono',monospace; font-size:16px; font-weight:600; }
   tr.vendido td{ color:var(--text-dim); }
+  .tabs{ overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
+  .tab-btn{ white-space:nowrap; }
+  #des-ativos tr{ cursor:pointer; }
+  #des-ativos tr.sel td{ background:var(--surface-2); }
+  #des-ativos tr.sel td:first-child{ box-shadow:inset 3px 0 0 var(--gold); }
+  .spark{ display:block; }
+  .vazio{ color:var(--text-dim); font-size:12.5px; padding:22px 6px; text-align:center; line-height:1.6; }
   @media (max-width:900px){ .marcos{ grid-template-columns:repeat(2,1fr); } }
   @media (max-width:640px){ .meta-grid{ grid-template-columns:1fr; } .marcos{ gap:10px; } }
 
@@ -237,6 +244,7 @@
   <button class="tab-btn" data-tab="posicoes">Posições</button>
   <button class="tab-btn" data-tab="proventos">Proventos</button>
   <button class="tab-btn" data-tab="evolucao">Evolução</button>
+  <button class="tab-btn" data-tab="desempenho">Desempenho</button>
 </div>
 
 <div class="tab-content" id="tab-geral">
@@ -407,6 +415,55 @@
 
 </div>
 
+<div class="tab-content evo" id="tab-desempenho" style="display:none">
+
+<div class="marcos" id="des-cards"></div>
+
+<section>
+  <div class="section-title">Rentabilidade da carteira</div>
+  <div class="section-note">Ganho acumulado desde o início do acompanhamento — compras e vendas não contam como ganho</div>
+  <div class="chart-card">
+    <div class="chart-head">
+      <div class="leg"><span><i class="linha" style="background:var(--gold)"></i>Com proventos</span><span><i class="linha" style="background:var(--slate)"></i>Só cotação</span></div>
+      <div class="chips" id="des-faixa">
+        <button class="chip" data-dias="30">1M</button>
+        <button class="chip" data-dias="90">3M</button>
+        <button class="chip" data-dias="182">6M</button>
+        <button class="chip" data-dias="365">1A</button>
+        <button class="chip on" data-dias="0">Tudo</button>
+      </div>
+    </div>
+    <div class="chart-box" id="des-rent"></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">Patrimônio x valor aplicado</div>
+  <div class="section-note">Valor aplicado = carteira no início + compras − vendas. A distância entre as linhas é o seu ganho (ou perda) de cotação</div>
+  <div class="chart-card">
+    <div class="chart-head"><div class="leg"><span><i class="linha" style="background:var(--gold)"></i>Valor de mercado</span><span><i class="linha" style="background:var(--text-dim)"></i>Valor aplicado</span></div></div>
+    <div class="chart-box" id="des-patr"></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">Desempenho por ativo</div>
+  <div class="section-note">Toque num ativo para ver o gráfico dele</div>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>Ativo</th><th>Desde</th><th>Com proventos</th><th>Só cotação</th><th>Tendência</th></tr></thead>
+    <tbody id="des-ativos"></tbody>
+  </table>
+  </div>
+  <div class="chart-card" style="margin-top:12px">
+    <div class="chart-head"><div class="leg" id="des-leg-ativo"></div></div>
+    <div class="chart-box" id="des-ativo"></div>
+  </div>
+  <div class="caveat">Rentabilidade ponderada no tempo: cada dia mede a variação da carteira descontando compras e vendas, então aportes não aparecem como ganho. Proventos entram no dia do pagamento. Em breve: comparação com IFIX e CDI (já estamos gravando esses índices).</div>
+</section>
+
+</div>
+
 <div id="tip"></div>
 
 <footer>
@@ -523,6 +580,8 @@ function normalizarCarteira(obj){
   p.cursores = p.cursores || {};
   const hoje = hojeISO();
   for (const t of Object.keys(c.ativos)) if (!p.cursores[t]) p.cursores[t] = hoje;
+  // Desempenho é medido a partir do primeiro dia em que a carteira está no app.
+  c.desempenho = c.desempenho || {inicio: hoje};
   c.versao = 1;
   return c;
 }
@@ -815,6 +874,7 @@ function render(data){
 
   document.getElementById('sub-updated').textContent = `${data.positions.length} ativos · carteira guardada neste aparelho`;
   renderEvolucao();
+  renderDesempenho();
 }
 
 function mostrarStatus(merc, offline){
@@ -1076,13 +1136,207 @@ document.getElementById('evo-faixa').addEventListener('click', e => {
   document.querySelectorAll('#evo-faixa .chip').forEach(c => c.classList.toggle('on', c === b));
   esconderTip(); renderEvolucao();
 });
-let _rz; addEventListener('resize', () => { clearTimeout(_rz); _rz = setTimeout(renderEvolucao, 150); });
+let _rz; addEventListener('resize', () => { clearTimeout(_rz); _rz = setTimeout(() => { renderEvolucao(); renderDesempenho(); }, 150); });
+
+/* ====================== Desempenho (a partir do início do acompanhamento) ====================== */
+let desDias = 0, desAtivo = null;
+const dataCurta = iso => iso.slice(8,10) + '/' + iso.slice(5,7);
+
+/** Preços de um fundo: pontos diários (12 meses) + 1 ponto por mês para o que é mais antigo. */
+function seriePrecos(t){
+  const p = MERC && MERC.ativos[t] && MERC.ativos[t].precos;
+  if (!p) return [];
+  const primeiro = p.diario.length ? p.diario[0][0].slice(0,7) : '9999-99';
+  return [...p.mensal.filter(([m]) => m < primeiro).map(([m, v]) => [m + '-31', v]), ...p.diario];
+}
+
+/**
+ * Rentabilidade ponderada no tempo de um conjunto de ativos, dia a dia.
+ * r(dia) = (valor hoje + proventos do dia − aportes líquidos do dia) / valor de ontem − 1
+ */
+function calcularDesempenho(tickers){
+  const ini = CART.desempenho.inicio;
+  const series = {}, ponteiro = {};
+  tickers.forEach(t => { series[t] = seriePrecos(t); ponteiro[t] = 0; });
+  const datas = [...new Set(tickers.flatMap(t => series[t].map(x => x[0])))].filter(d => d >= ini).sort();
+  const precoAte = (t, d) => {
+    const s = series[t]; let i = ponteiro[t];
+    while (i + 1 < s.length && s[i+1][0] <= d) i++;
+    ponteiro[t] = i;
+    return s.length && s[i][0] <= d ? s[i][1] : null;
+  };
+  const lanc = (CART.proventos.lancamentos || []).filter(l => l.d && tickers.includes(l.t));
+  const movs = tickers.flatMap(t => (CART.ativos[t].movimentos || []).map(m => ({...m, t})));
+  const pontos = [];
+  let fator = 1, fatorPreco = 1, aplicado = 0, provAc = 0, ant = null, vAnt = 0;
+  for (const d of datas) {
+    let v = 0;
+    for (const t of tickers) {
+      const c = cotasNaData(CART.ativos[t], d);
+      if (c) v += c * (precoAte(t, d) ?? CART.ativos[t].pm);
+    }
+    if (ant === null) {
+      aplicado = v;
+    } else {
+      const fluxo = movs.filter(m => m.data > ant && m.data <= d).reduce((s, m) => s + (m.tipo === 'venda' ? -1 : 1) * m.qtd * m.preco, 0);
+      const prov = lanc.filter(l => l.d > ant && l.d <= d).reduce((s, l) => s + l.v, 0);
+      if (vAnt > 0) { fator *= (v + prov - fluxo) / vAnt; fatorPreco *= (v - fluxo) / vAnt; }
+      aplicado += fluxo; provAc += prov;
+    }
+    pontos.push({d, v: r2(v), aplicado: r2(aplicado), fator, fatorPreco, provAc: r2(provAc)});
+    ant = d; vAnt = v;
+  }
+  return pontos;
+}
+
+/** Gráfico de linhas genérico (um eixo), com cruz e tooltip. linhas: [{nome, cor, v:[...], tracejado}] */
+function graficoLinhas(box, datas, linhas, fmtY, {zero = false, altura = 220} = {}){
+  const W = box.clientWidth;
+  if (!W) return;
+  if (datas.length < 2) {
+    box.innerHTML = `<div class="vazio">O acompanhamento começou em ${dataBR(CART.desempenho.inicio)}.<br>O gráfico ganha um ponto a cada dia útil — volte em alguns dias.</div>`;
+    return;
+  }
+  const H = altura, pl = hideValues ? 10 : 62, pr = 10, pt = 12, pb = 24, iw = W - pl - pr, ih = H - pt - pb;
+  const vals = linhas.flatMap(l => l.v.filter(v => v != null));
+  let mn = Math.min(...vals), mx = Math.max(...vals);
+  if (zero) { mn = Math.min(mn, 0); mx = Math.max(mx, 0); }
+  if (mx - mn < 1e-9) { mx += 1; mn -= 1; }
+  // Escala com passos "redondos" (1, 2, 2,5 ou 5 × 10^n)
+  const bruto = (mx - mn) / 4, pot = Math.pow(10, Math.floor(Math.log10(bruto)));
+  const passo = [1, 2, 2.5, 5, 10].map(k => k * pot).find(p => p >= bruto);
+  mn = Math.floor(mn / passo) * passo; mx = Math.ceil(mx / passo) * passo;
+  const x = i => pl + i * iw / (datas.length - 1);
+  const y = v => pt + (mx - v) / (mx - mn) * ih;
+  let g = '';
+  for (let v = mn; v <= mx + passo / 2; v += passo) {
+    const yy = y(v);
+    g += `<line x1="${pl}" x2="${W-pr}" y1="${yy}" y2="${yy}" stroke="var(--grid)"/>`;
+    if (!hideValues) g += `<text x="${pl-6}" y="${yy+3}" text-anchor="end">${fmtY(Math.abs(v) < passo / 1e6 ? 0 : v)}</text>`;
+  }
+  if (zero && mn < 0 && mx > 0) g += `<line x1="${pl}" x2="${W-pr}" y1="${y(0)}" y2="${y(0)}" stroke="var(--axis)" stroke-width="1.5"/>`;
+  for (const l of linhas) {
+    let d = '', pen = false;
+    l.v.forEach((v, i) => { if (v == null) { pen = false; return; } d += (pen ? 'L' : 'M') + x(i).toFixed(1) + ',' + y(v).toFixed(1); pen = true; });
+    g += `<path d="${d}" fill="none" stroke="${l.cor}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"${l.tracejado ? ' stroke-dasharray="5 4"' : ''}/>`;
+    const u = l.v.length - 1;
+    if (l.v[u] != null && !l.tracejado) g += `<circle cx="${x(u)}" cy="${y(l.v[u])}" r="4" fill="${l.cor}" stroke="var(--surface)" stroke-width="2"/>`;
+  }
+  const marcas = datas.length <= 3 ? datas.map((_, i) => i) : [0, Math.floor((datas.length - 1) / 2), datas.length - 1];
+  marcas.forEach(i => g += `<text x="${x(i)}" y="${H-6}" text-anchor="${i === 0 ? 'start' : i === datas.length - 1 ? 'end' : 'middle'}">${dataCurta(datas[i])}</text>`);
+  g += `<line class="evo-cross" x1="0" x2="0" y1="${pt}" y2="${pt+ih}" stroke="var(--text-dim)" stroke-dasharray="3 3" visibility="hidden"/>`;
+  g += `<rect x="${pl}" y="0" width="${iw}" height="${H}" fill="transparent"/>`;
+  box.innerHTML = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img">${g}</svg>`;
+
+  const svg = box.querySelector('svg'), cross = svg.querySelector('.evo-cross');
+  const mover = e => {
+    const px = e.clientX - svg.getBoundingClientRect().left;
+    const i = Math.max(0, Math.min(datas.length - 1, Math.round((px - pl) / (iw / (datas.length - 1)))));
+    cross.setAttribute('x1', x(i)); cross.setAttribute('x2', x(i)); cross.setAttribute('visibility', 'visible');
+    mostrarTip(`<b>${dataBR(datas[i])}</b>` + linhas.map(l => `<br><span class="mono"><i style="display:inline-block;width:9px;height:2px;background:${l.cor};vertical-align:middle;margin-right:6px"></i>${esc(l.nome)}&nbsp; ${l.v[i] == null ? '—' : fmtY(l.v[i], true)}</span>`).join(''), e);
+  };
+  svg.addEventListener('pointermove', mover);
+  svg.addEventListener('pointerdown', mover);
+  svg.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') esconderTip(); });
+}
+
+const fmtEixoPct = (v, tip) => tip ? fmtPct(v, 2) : (hideValues ? '' : fmt(v, 1) + '%');
+const fmtEixoR = (v, tip) => tip ? fmtR(v) : (hideValues ? '' : 'R$ ' + fmt(v, 0));
+
+/** Recorta a janela escolhida e recalcula a rentabilidade a partir do 1º dia dela. */
+function janela(pontos){
+  if (!desDias || pontos.length < 2) return pontos;
+  const ult = new Date(pontos[pontos.length - 1].d + 'T12:00:00');
+  const corte = new Date(ult.getTime() - desDias * 86400000).toISOString().slice(0,10);
+  const k = Math.max(0, pontos.findIndex(p => p.d >= corte));
+  return pontos.slice(k);
+}
+const rentDesde = (p, base, campo) => (p[campo] / base[campo] - 1) * 100;
+
+function sparkline(pontos){
+  if (pontos.length < 2) return '<span class="dim">—</span>';
+  const w = 90, h = 26, vs = pontos.map(p => p.fator);
+  const mn = Math.min(...vs), mx = Math.max(...vs), amp = (mx - mn) || 1;
+  const d = vs.map((v, i) => (i ? 'L' : 'M') + (i * w / (vs.length - 1)).toFixed(1) + ',' + (2 + (mx - v) / amp * (h - 4)).toFixed(1)).join('');
+  const cor = vs[vs.length - 1] >= vs[0] ? 'var(--teal)' : 'var(--coral)';
+  return `<svg class="spark" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><path d="${d}" fill="none" stroke="${cor}" stroke-width="1.5"/></svg>`;
+}
+
+function renderDesempenho(){
+  if (!CART || document.getElementById('tab-desempenho').style.display === 'none') return;
+  const tickers = Object.keys(CART.ativos).filter(t => CART.ativos[t].cotas > 0 || (CART.ativos[t].movimentos || []).some(m => m.data >= CART.desempenho.inicio));
+  const todos = calcularDesempenho(tickers);
+  const pts = janela(todos), base = pts[0], ult = pts[pts.length - 1];
+
+  // Cards
+  const cards = document.getElementById('des-cards');
+  if (!ult) {
+    cards.innerHTML = `<div class="kpi" style="grid-column:1/-1"><div class="label">Acompanhamento iniciado em ${dataBR(CART.desempenho.inicio)}</div><div class="delta dim">Os dados de desempenho aparecem depois da próxima coleta de preços (dias úteis, ~13h e ~18h40).</div></div>`;
+  } else {
+    const rCom = rentDesde(ult, todos[0], 'fator'), rPreco = rentDesde(ult, todos[0], 'fatorPreco');
+    const ganho = r2(ult.v + ult.provAc - ult.aplicado);
+    cards.innerHTML = `
+      <div class="kpi"><div class="label">Rentabilidade desde ${dataBR(CART.desempenho.inicio)}</div><div class="value ${rCom >= 0 ? 'pos' : ''}" style="${rCom < 0 ? 'color:var(--coral)' : ''}">${fmtPct(rCom, 2)}</div><div class="delta dim">com proventos</div></div>
+      <div class="kpi"><div class="label">Só cotação</div><div class="value">${fmtPct(rPreco, 2)}</div><div class="delta dim">sem contar proventos</div></div>
+      <div class="kpi"><div class="label">Ganho em R$</div><div class="value ${ganho >= 0 ? 'pos' : ''}" style="${ganho < 0 ? 'color:var(--coral)' : ''}">${fmtR(ganho)}</div><div class="delta dim">cotação + proventos</div></div>
+      <div class="kpi"><div class="label">Proventos no período</div><div class="value gold">${fmtR(ult.provAc)}</div><div class="delta dim">desde ${dataBR(CART.desempenho.inicio)}</div></div>`;
+  }
+
+  // Rentabilidade acumulada (rebaseada no início da janela) e patrimônio
+  const datas = pts.map(p => p.d);
+  graficoLinhas(document.getElementById('des-rent'), datas, [
+    {nome:'Com proventos', cor:'var(--gold)', v: pts.map(p => rentDesde(p, base, 'fator'))},
+    {nome:'Só cotação', cor:'var(--slate)', v: pts.map(p => rentDesde(p, base, 'fatorPreco'))},
+  ], fmtEixoPct, {zero:true});
+  graficoLinhas(document.getElementById('des-patr'), datas, [
+    {nome:'Valor de mercado', cor:'var(--gold)', v: pts.map(p => p.v)},
+    {nome:'Valor aplicado', cor:'var(--text-dim)', v: pts.map(p => p.aplicado), tracejado:true},
+  ], fmtEixoR);
+
+  // Por ativo
+  const porAtivo = tickers.map(t => {
+    const pa = janela(calcularDesempenho([t]));
+    const b = pa.find(p => p.v > 0) || pa[0], u = pa[pa.length - 1];
+    return {t, pa, desde: b ? b.d : null,
+            com: b && u && b !== u ? rentDesde(u, b, 'fator') : null, preco: b && u && b !== u ? rentDesde(u, b, 'fatorPreco') : null};
+  }).sort((a, b) => (b.com ?? -1e9) - (a.com ?? -1e9));
+  if (!desAtivo || !porAtivo.some(a => a.t === desAtivo)) desAtivo = porAtivo[0] && porAtivo[0].t;
+  const celula = v => v == null ? '<span class="dim">—</span>' : `<span class="${v >= 0 ? 'pos' : 'neg'}">${fmtPct(v, 2)}</span>`;
+  document.getElementById('des-ativos').innerHTML = porAtivo.length ? porAtivo.map(a => `
+    <tr data-t="${esc(a.t)}" class="${a.t === desAtivo ? 'sel' : ''}">
+      <td class="ticker-cell">${esc(a.t)}</td><td>${a.desde ? dataCurta(a.desde) : '—'}</td>
+      <td>${celula(a.com)}</td><td>${celula(a.preco)}</td><td>${sparkline(a.pa.filter(p => p.v > 0))}</td>
+    </tr>`).join('') : '<tr><td colspan="5" class="dim">Nenhum ativo na carteira.</td></tr>';
+
+  // Gráfico do ativo selecionado: preço x preço médio
+  const sel = porAtivo.find(a => a.t === desAtivo);
+  const legA = document.getElementById('des-leg-ativo'), boxA = document.getElementById('des-ativo');
+  if (!sel) { legA.innerHTML = ''; boxA.innerHTML = ''; return; }
+  const h = CART.ativos[sel.t];
+  const serie = seriePrecos(sel.t).filter(([d]) => d >= (sel.pa[0] ? sel.pa[0].d : CART.desempenho.inicio));
+  legA.innerHTML = `<span><b style="color:var(--text);font-family:'IBM Plex Mono',monospace">${esc(sel.t)}</b></span><span><i class="linha" style="background:var(--slate)"></i>Cotação</span><span><i class="linha" style="background:var(--text-dim)"></i>Seu preço médio (${fmtR(h.pm)})</span>`;
+  graficoLinhas(boxA, serie.map(s => s[0]), [
+    {nome:'Cotação', cor:'var(--slate)', v: serie.map(s => s[1])},
+    {nome:'Preço médio', cor:'var(--text-dim)', v: serie.map(() => h.pm), tracejado:true},
+  ], fmtEixoR, {altura:200});
+}
+document.getElementById('des-ativos').addEventListener('click', e => {
+  const tr = e.target.closest('tr[data-t]'); if (!tr) return;
+  desAtivo = tr.dataset.t; esconderTip(); renderDesempenho();
+});
+document.getElementById('des-faixa').addEventListener('click', e => {
+  const b = e.target.closest('.chip'); if (!b) return;
+  desDias = +b.dataset.dias;
+  document.querySelectorAll('#des-faixa .chip').forEach(c => c.classList.toggle('on', c === b));
+  esconderTip(); renderDesempenho();
+});
 
 /* ====================== Fluxo principal ====================== */
 async function iniciar(){
   CART = lerCarteira();
   if (!CART) { document.getElementById('setup').hidden = false; return; }
   document.getElementById('setup').hidden = true;
+  if (!CART.desempenho) { CART.desempenho = {inicio: hojeISO()}; salvarCarteira(CART); }  // carteiras importadas antes desta versão
 
   const {m, offline} = await carregarMercado(Object.keys(CART.ativos));
   MERC = m;
@@ -1271,6 +1525,7 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
     document.getElementById('tab-'+btn.dataset.tab).style.display='block';
     esconderTip();
     if (btn.dataset.tab === 'evolucao') renderEvolucao();
+    if (btn.dataset.tab === 'desempenho') renderDesempenho();
   });
 });
 

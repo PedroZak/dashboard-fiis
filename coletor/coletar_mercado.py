@@ -138,6 +138,60 @@ def yahoo_preco(ticker):
     return positivo(meta.get("regularMarketPrice")), (datetime.fromtimestamp(quando, BRT).strftime("%Y-%m-%d") if quando else None)
 
 
+# ---------------------------------------------------------------- séries diárias (desempenho)
+DIAS_DIARIO = 366  # 12 meses de pontos diários; o que é mais antigo vira 1 ponto por mês
+
+
+def registrar_diario(serie, data, valor, agora, modo="ultimo"):
+    """
+    Atualiza uma série {"diario": [[data, valor]], "mensal": [[aaaa-mm, valor]]}.
+    - diario: 1 ponto por dia, últimos 12 meses (a coleta das 13h é sobrescrita pela das 18h40)
+    - mensal: o que sai do diário é compactado em 1 ponto por mês, guardado sem prazo
+        modo "ultimo":    fica o último valor do mês (preço de fechamento do mês)
+        modo "acumulado": taxas % ao dia viram a taxa % acumulada no mês (CDI)
+    """
+    serie = serie or {}
+    diario = dict(serie.get("diario", []))
+    mensal = dict(serie.get("mensal", []))
+    if data and valor is not None:
+        diario[data] = valor
+    corte = (agora - timedelta(days=DIAS_DIARIO)).strftime("%Y-%m-%d")
+    for d in sorted(k for k in diario if k < corte):
+        v, m = diario.pop(d), d[:7]
+        if modo == "acumulado":
+            mensal[m] = round(((1 + mensal.get(m, 0) / 100) * (1 + v / 100) - 1) * 100, 6)
+        else:
+            mensal[m] = v
+    return {"diario": sorted(diario.items()), "mensal": sorted(mensal.items())}
+
+
+def benchmarks(arquivo, agora, falhas):
+    """IFIX (Yahoo) e CDI (Banco Central, série SGS 12 = % ao dia) — gravados a partir de agora."""
+    b = ler_json(arquivo) or {}
+    try:
+        r = requests.get("https://query1.finance.yahoo.com/v8/finance/chart/IFIX.SA",
+                         params={"range": "5d", "interval": "1d"}, headers=H, timeout=30)
+        r.raise_for_status()
+        meta = r.json()["chart"]["result"][0]["meta"]
+        data = datetime.fromtimestamp(meta["regularMarketTime"], BRT).strftime("%Y-%m-%d")
+        b["ifix"] = registrar_diario(b.get("ifix"), data, positivo(meta.get("regularMarketPrice")), agora)
+    except Exception as e:
+        falhas.append(f"IFIX: {type(e).__name__}: {str(e)[:100]}")
+    try:
+        r = requests.get("https://api.bcb.gov.br/dados/serie/bcdata.sgs.12/dados/ultimos/10",
+                         params={"formato": "json"}, headers=H, timeout=30)
+        r.raise_for_status()
+        serie = b.get("cdi")
+        for p in r.json():
+            dd, mm, aa = p["data"].split("/")
+            serie = registrar_diario(serie, f"{aa}-{mm}-{dd}", float(p["valor"]), agora, "acumulado")
+        b["cdi"] = serie
+    except Exception as e:
+        falhas.append(f"CDI: {type(e).__name__}: {str(e)[:100]}")
+    b["obs"] = "ifix: pontos do índice · cdi: % ao dia (diario) e % acumulada no mês (mensal)"
+    arquivo.write_text(json.dumps(b, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+
+
 # ---------------------------------------------------------------- principal
 def ler_json(p):
     try:
@@ -217,6 +271,8 @@ def main():
                 "pvp": d["pvp"], "dyCagr3": d["dyCagr3"], "dyCagr5": d["dyCagr5"], "vacancia": d["vacancia"]}
         hist = [h for h in anterior.get("historico", []) if h.get("m") != mes] + [foto]
         d["historico"] = sorted(hist, key=lambda h: h["m"])[-MESES_HISTORICO:]
+        # Preço de cada dia, a partir de agora (base dos gráficos de desempenho).
+        d["precos"] = registrar_diario(anterior.get("precos"), d.get("precoData"), d.get("preco"), agora)
         d["ticker"] = t
         d["atualizadoEm"] = agora_iso
 
@@ -247,6 +303,8 @@ def main():
     if ok == 0:
         print("Nenhum fundo coletado — nada será publicado.", file=sys.stderr)
         sys.exit(1)
+
+    benchmarks(saida / "benchmarks.json", agora, falhas)
 
     indice = {"geradoEm": agora_iso, "fontes": "fiis.com.br, Yahoo Finance, Fundamentus",
               "total": len(disponiveis), "ativos": disponiveis, "removidos": removidos, "falhas": falhas}
