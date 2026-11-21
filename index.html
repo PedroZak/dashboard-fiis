@@ -1201,10 +1201,40 @@ const dataCurta = iso => iso.slice(8,10) + '/' + iso.slice(5,7);
 
 /** Preços de um fundo: pontos diários (12 meses) + 1 ponto por mês para o que é mais antigo. */
 function seriePrecos(t){
+  // Preços históricos importados (só no aparelho) + série publicada pelo coletor; o coletor prevalece no mesmo dia.
+  const mapa = new Map((CART && CART.precosHistoricos && CART.precosHistoricos[t]) || []);
   const p = MERC && MERC.ativos[t] && MERC.ativos[t].precos;
-  if (!p) return [];
-  const primeiro = p.diario.length ? p.diario[0][0].slice(0,7) : '9999-99';
-  return [...p.mensal.filter(([m]) => m < primeiro).map(([m, v]) => [m + '-31', v]), ...p.diario];
+  if (p) {
+    const primeiro = p.diario.length ? p.diario[0][0].slice(0,7) : '9999-99';
+    p.mensal.filter(([m]) => m < primeiro).forEach(([m, v]) => { if (![...mapa.keys()].some(d => d.startsWith(m))) mapa.set(m + '-31', v); });
+    p.diario.forEach(([d, v]) => mapa.set(d, v));
+  }
+  const serie = [...mapa.entries()].sort((a, b) => a[0].localeCompare(b[0]));
+  // Proteção contra preço absurdo da fonte (ex.: R$ 1,07 num fundo de R$ 110): fora de 0,5x–2x
+  // da mediana dos 10 pregões vizinhos, o ponto é ignorado.
+  return serie.filter(([, v], i) => {
+    const viz = [...serie.slice(Math.max(0, i - 5), i), ...serie.slice(i + 1, i + 6)].map(x => x[1]).sort((a, b) => a - b);
+    const med = viz.length ? viz[Math.floor(viz.length / 2)] : v;
+    return !med || (v / med >= 0.5 && v / med <= 2);
+  });
+}
+
+/** Compras/vendas de um fundo: as registradas no app + as do histórico importado (sem repetir). */
+function movimentosDe(t){
+  const h = CART.ativos[t];
+  const todos = [...((h && h.movimentos) || []), ...((CART.historicoMovimentos || []).filter(m => m.t === t))];
+  const vistos = new Set();
+  return todos.filter(m => { const k = [m.data, m.tipo, m.qtd, m.preco].join('|'); if (vistos.has(k)) return false; vistos.add(k); return true; });
+}
+/** Cotas no fechamento do dia d: posição atual desfazendo as operações posteriores a d. */
+function cotasEm(t, d, movs){
+  let c = (CART.ativos[t] && CART.ativos[t].cotas) || 0;
+  for (const m of movs) if (m.data > d) c += (m.tipo === 'venda' ? m.qtd : -m.qtd);
+  return Math.max(0, c);
+}
+/** Fundos que fazem parte do desempenho: os da carteira + os que aparecem no histórico de operações. */
+function tickersDesempenho(){
+  return [...new Set([...Object.keys(CART.ativos), ...(CART.historicoMovimentos || []).map(m => m.t)])];
 }
 
 /**
@@ -1222,15 +1252,19 @@ function calcularDesempenho(tickers){
     ponteiro[t] = i;
     return s.length && s[i][0] <= d ? s[i][1] : null;
   };
-  const lanc = (CART.proventos.lancamentos || []).filter(l => l.d && tickers.includes(l.t));
-  const movs = tickers.flatMap(t => (CART.ativos[t].movimentos || []).map(m => ({...m, t})));
+  // Proventos da planilha só têm o mês: no cálculo diário entram no dia 15 desse mês.
+  const lanc = (CART.proventos.lancamentos || []).filter(l => tickers.includes(l.t))
+    .map(l => ({...l, d: l.d || (l.m + '-15')}));
+  const movsPor = {};
+  tickers.forEach(t => movsPor[t] = movimentosDe(t));
+  const movs = tickers.flatMap(t => movsPor[t].map(m => ({...m, t})));
   const pontos = [];
   let fator = 1, fatorPreco = 1, aplicado = 0, provAc = 0, ant = null, vAnt = 0;
   for (const d of datas) {
     let v = 0;
     for (const t of tickers) {
-      const c = cotasNaData(CART.ativos[t], d);
-      if (c) v += c * (precoAte(t, d) ?? CART.ativos[t].pm);
+      const c = cotasEm(t, d, movsPor[t]);
+      if (c) v += c * (precoAte(t, d) ?? ((CART.ativos[t] && CART.ativos[t].pm) || 0));
     }
     if (ant === null) {
       aplicado = v;
@@ -1321,7 +1355,8 @@ function sparkline(pontos){
 
 function renderDesempenho(){
   if (!CART || document.getElementById('tab-desempenho').style.display === 'none') return;
-  const tickers = Object.keys(CART.ativos).filter(t => CART.ativos[t].cotas > 0 || (CART.ativos[t].movimentos || []).some(m => m.data >= CART.desempenho.inicio));
+  const tickers = tickersDesempenho().filter(t => cotasEm(t, CART.desempenho.inicio, movimentosDe(t)) > 0
+    || (CART.ativos[t] && CART.ativos[t].cotas > 0) || movimentosDe(t).some(m => m.data >= CART.desempenho.inicio));
   const todos = calcularDesempenho(tickers);
   const pts = janela(todos), base = pts[0], ult = pts[pts.length - 1];
 
@@ -1369,12 +1404,14 @@ function renderDesempenho(){
   const sel = porAtivo.find(a => a.t === desAtivo);
   const legA = document.getElementById('des-leg-ativo'), boxA = document.getElementById('des-ativo');
   if (!sel) { legA.innerHTML = ''; boxA.innerHTML = ''; return; }
-  const h = CART.ativos[sel.t];
-  const serie = seriePrecos(sel.t).filter(([d]) => d >= (sel.pa[0] ? sel.pa[0].d : CART.desempenho.inicio));
-  legA.innerHTML = `<span><b style="color:var(--text);font-family:'IBM Plex Mono',monospace">${esc(sel.t)}</b></span><span><i class="linha" style="background:var(--slate)"></i>Cotação</span><span><i class="linha" style="background:var(--text-dim)"></i>Seu preço médio (${fmtR(h.pm)})</span>`;
+  const h = CART.ativos[sel.t] && CART.ativos[sel.t].cotas > 0 ? CART.ativos[sel.t] : null;  // vendido: sem preço médio atual
+  const ini = sel.pa[0] ? sel.pa[0].d : CART.desempenho.inicio, fim = sel.pa.length ? sel.pa[sel.pa.length - 1].d : '9999';
+  const serie = seriePrecos(sel.t).filter(([d]) => d >= ini && d <= fim);
+  legA.innerHTML = `<span><b style="color:var(--text);font-family:'IBM Plex Mono',monospace">${esc(sel.t)}</b></span><span><i class="linha" style="background:var(--slate)"></i>Cotação</span>`
+    + (h ? `<span><i class="linha" style="background:var(--text-dim)"></i>Seu preço médio (${fmtR(h.pm)})</span>` : '<span class="dim">vendido</span>');
   graficoLinhas(boxA, serie.map(s => s[0]), [
     {nome:'Cotação', cor:'var(--slate)', v: serie.map(s => s[1])},
-    {nome:'Preço médio', cor:'var(--text-dim)', v: serie.map(() => h.pm), tracejado:true},
+    ...(h ? [{nome:'Preço médio', cor:'var(--text-dim)', v: serie.map(() => h.pm), tracejado:true}] : []),
   ], fmtEixoR, {altura:200});
 }
 document.getElementById('des-ativos').addEventListener('click', e => {
@@ -1452,6 +1489,24 @@ arquivo.addEventListener('change', async () => {
       document.getElementById('menu').close();
       recalcular();
       mostrarAviso([`<b>${novos.length} operação(ões) adicionada(s)</b> ao histórico${novos.length < (obj.movimentos || []).length ? ' (as repetidas foram ignoradas)' : ''}. Veja em Posições → Histórico de operações.`]);
+      return;
+    }
+    // Arquivo de preços históricos: MESCLA na carteira e antecipa o início do desempenho.
+    if (obj && obj.tipo === 'historico-precos') {
+      if (!CART) throw new Error('Importe ou crie a carteira primeiro; depois importe os preços históricos.');
+      const atuais = CART.precosHistoricos || {};
+      let n = 0;
+      for (const [t, serie] of Object.entries(obj.ativos || {})) {
+        const mapa = new Map(atuais[t] || []);
+        for (const [d, v] of serie) { if (!mapa.has(d)) n++; mapa.set(d, v); }
+        atuais[t] = [...mapa.entries()].sort((a, b) => a[0].localeCompare(b[0]));
+      }
+      CART.precosHistoricos = atuais;
+      if (obj.inicio && obj.inicio < CART.desempenho.inicio) CART.desempenho.inicio = obj.inicio;
+      salvarCarteira(CART);
+      document.getElementById('menu').close();
+      recalcular();
+      mostrarAviso([`<b>${n} preços históricos importados</b> (${Object.keys(obj.ativos || {}).length} fundos). O desempenho agora começa em ${dataBR(CART.desempenho.inicio)} — veja a aba Desempenho.`]);
       return;
     }
     const c = normalizarCarteira(obj);
