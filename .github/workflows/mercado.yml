@@ -21,12 +21,9 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  publicar:
+  coletar:
     runs-on: ubuntu-latest
     timeout-minutes: 40
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -85,5 +82,14 @@ jobs:
         with:
           path: _site
 
+  # Job separado (como no modelo oficial do GitHub): quando ele começa, o artefato do site
+  # já está registrado — publicar no mesmo job às vezes falha com "No artifacts found".
+  publicar:
+    needs: coletar
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
       - id: deploy
         uses: actions/deploy-pages@v4
