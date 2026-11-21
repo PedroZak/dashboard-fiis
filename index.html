@@ -13,6 +13,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="FIIs">
 <meta name="mobile-web-app-capable" content="yes">
+<meta name="app-versao" content="2026-11-21.1">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -550,6 +551,20 @@
 </dialog>
 
 <script>
+/* Atualização automática: se o servidor tem uma versão mais nova do app do que a aberta
+   (cache do navegador/PWA), recarrega por um endereço novo, que ignora o cache. */
+(async () => {
+  try {
+    const atual = document.querySelector('meta[name="app-versao"]').content;
+    const txt = await (await fetch('index.html?v=' + Date.now(), {cache:'no-store'})).text();
+    const m = txt.match(/name="app-versao" content="([^"]+)"/);
+    if (m && m[1] !== atual && sessionStorage.getItem('fii-atualizou') !== m[1]) {
+      sessionStorage.setItem('fii-atualizou', m[1]);
+      location.replace(location.pathname.replace(/index\.html$/, '') + 'index.html?v=' + encodeURIComponent(m[1]));
+    }
+  } catch {}
+})();
+
 const K_CART = 'fii-carteira', K_MERC = 'fii-mercado2';
 try { localStorage.removeItem('fii-mercado'); } catch {}   // cache do formato antigo
 let DATA = null, CART = null, MERC = null;
@@ -1495,8 +1510,9 @@ arquivo.addEventListener('change', async () => {
     if (obj && obj.tipo === 'historico-precos') {
       if (!CART) throw new Error('Importe ou crie a carteira primeiro; depois importe os preços históricos.');
       const atuais = CART.precosHistoricos || {};
+      const recebidos = obj.precos || obj.ativos || {};
       let n = 0;
-      for (const [t, serie] of Object.entries(obj.ativos || {})) {
+      for (const [t, serie] of Object.entries(recebidos)) {
         const mapa = new Map(atuais[t] || []);
         for (const [d, v] of serie) { if (!mapa.has(d)) n++; mapa.set(d, v); }
         atuais[t] = [...mapa.entries()].sort((a, b) => a[0].localeCompare(b[0]));
@@ -1506,7 +1522,7 @@ arquivo.addEventListener('change', async () => {
       salvarCarteira(CART);
       document.getElementById('menu').close();
       recalcular();
-      mostrarAviso([`<b>${n} preços históricos importados</b> (${Object.keys(obj.ativos || {}).length} fundos). O desempenho agora começa em ${dataBR(CART.desempenho.inicio)} — veja a aba Desempenho.`]);
+      mostrarAviso([`<b>${n} preços históricos importados</b> (${Object.keys(recebidos).length} fundos). O desempenho agora começa em ${dataBR(CART.desempenho.inicio)} — veja a aba Desempenho.`]);
       return;
     }
     const c = normalizarCarteira(obj);
